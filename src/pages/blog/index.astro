@@ -5,7 +5,7 @@ import { getPosts, getTopics, formatDate, readingTime } from '../../utils/posts'
 const posts = await getPosts();
 const topics = await getTopics();
 
-// Индекс для клиентского поиска — встраивается в страницу, запросов нет.
+// Client-side search index — inlined into the page, zero requests.
 const searchIndex = posts.map((p) => ({
   id: p.id,
   title: p.data.title,
@@ -21,31 +21,31 @@ const searchIndex = posts.map((p) => ({
 ---
 
 <Base
-  title="Блог"
-  description="Архив всех постов: эссе, разборы с цифрами и исследования о стартапах, продукте, ИИ и венчуре."
+  title="Blog"
+  description="The full archive: essays, chart-driven teardowns and research on startups, product, AI and venture."
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
-    <h1 class="font-serif text-[2.4rem] font-semibold tracking-tight sm:text-[3rem]">Архив</h1>
+    <h1 class="font-serif text-[2.4rem] font-semibold tracking-tight sm:text-[3rem]">Archive</h1>
     <p class="mt-3 max-w-xl leading-relaxed text-muted">
-      Все посты: от коротких разборов «одна мысль — один график» до больших исследований.
+      Every post: from short "one idea — one chart" teardowns to big research pieces.
     </p>
 
-    {/* Поиск по архиву (Tunguz: при сотнях постов — must have). */}
+    {/* Archive search (Tunguz: a must-have once you have hundreds of posts). */}
     <div class="mt-8">
-      <label class="sr-only" for="search">Поиск по постам</label>
+      <label class="sr-only" for="search">Search posts</label>
       <input
         id="search"
         type="search"
-        placeholder="Поиск по заголовкам и тексту…"
+        placeholder="Search titles and full text…"
         autocomplete="off"
         class="w-full rounded-full border bg-surface px-6 py-3.5 text-[1rem] outline-none transition-colors placeholder:text-muted focus:border-muted"
         style="border-color: rgb(var(--c-line) / 0.25)"
       />
     </div>
 
-    {/* Фильтр по рубрикам */}
+    {/* Topic filter */}
     <div class="mt-5 flex flex-wrap gap-2" id="topic-filters">
-      <button data-topic="" class="filter-btn meta-label rounded-full border px-4 py-2 transition-colors" style="border-color: rgb(var(--c-text) / 0.6)">Все</button>
+      <button data-topic="" class="filter-btn meta-label rounded-full border px-4 py-2 transition-colors" style="border-color: rgb(var(--c-text) / 0.6)">All</button>
       {
         topics.map((t) => (
           <button data-topic={t.id} class="filter-btn meta-label rounded-full border px-4 py-2 transition-colors" style="border-color: rgb(var(--c-line) / 0.2)">
@@ -70,7 +70,7 @@ const searchIndex = posts.map((p) => ({
   const filterBtns = [...document.querySelectorAll<HTMLButtonElement>('.filter-btn')];
   let activeTopic = '';
 
-  // ?q= из SearchAction (Schema.org) — сразу применяем запрос.
+  // ?q= from the Schema.org SearchAction — apply the query right away.
   const params = new URLSearchParams(location.search);
   if (params.get('q')) input.value = params.get('q')!;
 
@@ -85,7 +85,7 @@ const searchIndex = posts.map((p) => ({
         (!activeTopic || p.topicSlug === activeTopic) &&
         terms.every((t) => `${p.title} ${p.description} ${p.tags.join(' ')} ${p.text}`.toLowerCase().includes(t)),
     );
-    status.textContent = q || activeTopic ? `Найдено: ${filtered.length}` : `Всего постов: ${index.length}`;
+    status.textContent = q || activeTopic ? `Found: ${filtered.length}` : `Total posts: ${index.length}`;
     results.innerHTML = filtered
       .map(
         (p: any) => `
@@ -93,7 +93,7 @@ const searchIndex = posts.map((p) => ({
           <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
             <a href="/topics/${p.topicSlug}" class="meta-label text-accentink hover:underline underline-offset-4">${esc(p.topic)}</a>
             <time class="meta-label" datetime="${p.iso}">${esc(p.date)}</time>
-            <span class="meta-label">${p.minutes} мин</span>
+            <span class="meta-label">${p.minutes} min read</span>
           </div>
           <h3 class="mt-2.5 font-serif text-[1.55rem] font-semibold leading-snug tracking-tight">
             <a href="/blog/${p.id}" class="transition-colors group-hover:text-accentink">${esc(p.title)}</a>
@@ -103,7 +103,7 @@ const searchIndex = posts.map((p) => ({
       )
       .join('');
     if (filtered.length === 0) {
-      results.innerHTML = `<p class="py-10 text-muted">Ничего не найдено. Попробуйте другой запрос или <a class="link-underline" href="/blog">сбросьте фильтры</a>.</p>`;
+      results.innerHTML = `<p class="py-10 text-muted">Nothing found. Try another query or <a class="link-underline" href="/blog">reset the filters</a>.</p>`;
     }
   }
 

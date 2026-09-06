@@ -32,7 +32,7 @@ const description = post.data.seo?.description ?? post.data.description;
 const url = new URL(`/blog/${post.id}`, SITE.url).toString();
 const ogImage = `/og/${post.id}.png`;
 
-// Schema.org: BlogPosting + BreadcrumbList (+ FAQPage, если есть FAQ).
+// Schema.org: BlogPosting + BreadcrumbList (+ FAQPage if FAQ exists).
 const blogPostingLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -47,7 +47,7 @@ const blogPostingLd = {
   author: {
     '@type': 'Person',
     name: AUTHOR.name,
-    alternateName: AUTHOR.nameEn,
+    alternateName: AUTHOR.nameNative,
     url: `${SITE.url}/about`,
     sameAs: AUTHOR.socials.map((s) => s.url),
   },
@@ -64,7 +64,7 @@ const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Блог', item: `${SITE.url}/blog` },
+    { '@type': 'ListItem', position: 1, name: 'Blog', item: `${SITE.url}/blog` },
     ...(topic
       ? [
           {
@@ -100,9 +100,9 @@ const faqLd = post.data.faq?.length
   jsonLd={[blogPostingLd, breadcrumbLd, ...(faqLd ? [faqLd] : [])]}
 >
   <article class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
-    {/* Хлебные крошки */}
-    <nav aria-label="Хлебные крошки" class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-      <a href="/blog" class="meta-label hover:text-ink">Блог</a>
+    {/* Breadcrumbs */}
+    <nav aria-label="Breadcrumbs" class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <a href="/blog" class="meta-label hover:text-ink">Blog</a>
       {topic && (
         <>
           <span class="meta-label" aria-hidden="true">/</span>
@@ -125,18 +125,18 @@ const faqLd = post.data.faq?.length
       {
         post.data.updatedDate && (
           <span class="meta-label">
-            Обновлено: <time datetime={post.data.updatedDate.toISOString()}>{formatDate(post.data.updatedDate)}</time>
+            Updated: <time datetime={post.data.updatedDate.toISOString()}>{formatDate(post.data.updatedDate)}</time>
           </span>
         )
       }
-      <span class="meta-label">{minutes} мин чтения</span>
+      <span class="meta-label">{minutes} min read</span>
     </div>
 
-    {/* TL;DR — саммари для читателей и LLM. */}
+    {/* TL;DR — summary for readers and LLMs alike. */}
     {
       post.data.tldr && (
-        <aside class="mt-8 border line bg-surface p-6" aria-label="Ключевые выводы">
-          <p class="meta-label">TL;DR — ключевые выводы</p>
+        <aside class="mt-8 border line bg-surface p-6" aria-label="Key takeaways">
+          <p class="meta-label">TL;DR — key takeaways</p>
           <ul class="mt-4 space-y-2.5">
             {post.data.tldr.map((item) => (
               <li class="flex gap-3 text-[1.02rem] leading-relaxed">
@@ -153,11 +153,11 @@ const faqLd = post.data.faq?.length
       <Content />
     </div>
 
-    {/* FAQ-блок с разметкой FAQPage. */}
+    {/* FAQ block with FAQPage markup. */}
     {
       post.data.faq && post.data.faq.length > 0 && (
         <section class="mt-14 border-t line pt-10">
-          <h2 class="font-serif text-3xl font-semibold tracking-tight">Частые вопросы</h2>
+          <h2 class="font-serif text-3xl font-semibold tracking-tight">Frequently asked questions</h2>
           <div class="mt-6 divide-y divide-transparent">
             {post.data.faq.map(({ q, a }) => (
               <details class="group border-b line py-5">
@@ -173,11 +173,11 @@ const faqLd = post.data.faq?.length
       )
     }
 
-    {/* Приложения: данные, таблицы, PDF (практика Damodaran). */}
+    {/* Attachments: data, tables, PDFs (the Damodaran practice). */}
     {
       post.data.attachments && post.data.attachments.length > 0 && (
         <section class="mt-14 border line bg-surface p-6">
-          <p class="meta-label">Приложения к посту</p>
+          <p class="meta-label">Post attachments</p>
           <ul class="mt-4 space-y-2.5">
             {post.data.attachments.map(({ title, url }) => (
               <li>
@@ -194,7 +194,7 @@ const faqLd = post.data.faq?.length
       )
     }
 
-    {/* Теги */}
+    {/* Tags */}
     {
       post.data.tags.length > 0 && (
         <div class="mt-10 flex flex-wrap gap-2">
@@ -207,30 +207,30 @@ const faqLd = post.data.faq?.length
       )
     }
 
-    {/* CTA подписки в конце поста. */}
+    {/* Subscribe CTA at the end of the post. */}
     <div class="mt-14">
       <SubscribeForm compact />
     </div>
 
-    {/* Об авторе */}
+    {/* About the author */}
     <aside class="mt-12 flex items-start gap-5 border-t line pt-8">
       <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent font-serif text-xl font-semibold text-[#101010]" aria-hidden="true">
-        НШ
+        NS
       </div>
       <div>
         <p class="font-serif text-lg font-semibold">{AUTHOR.name}</p>
         <p class="mt-1 text-[0.95rem] leading-relaxed text-muted">{AUTHOR.bio}</p>
         <a href="/about" class="link-underline mt-2 inline-block font-mono text-[0.72rem] uppercase tracking-[0.12em] text-muted hover:text-ink">
-          Подробнее →
+          Read more →
         </a>
       </div>
     </aside>
 
-    {/* Связанные посты — внутренняя перелинковка. */}
+    {/* Related posts — internal linking. */}
     {
       related.length > 0 && (
         <section class="mt-16">
-          <h2 class="meta-label mb-2">Читать дальше</h2>
+          <h2 class="meta-label mb-2">Read next</h2>
           <div>
             {related.map((p) => (
               <PostCard post={p} topics={topics} />
