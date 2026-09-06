@@ -1,0 +1,243 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
+import { AUTHOR, SITE } from '../../consts';
+import {
+  formatDate,
+  getPosts,
+  getTopics,
+  readingTime,
+  relatedPosts,
+  type Post,
+} from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+const { Content } = await render(post);
+
+const all = await getPosts();
+const topics = await getTopics();
+const topic = topics.find((t) => t.id === post.data.topic);
+const related = relatedPosts(post, all);
+const minutes = readingTime(post.body ?? '');
+
+const title = post.data.seo?.title ?? post.data.title;
+const description = post.data.seo?.description ?? post.data.description;
+const url = new URL(`/blog/${post.id}`, SITE.url).toString();
+const ogImage = `/og/${post.id}.png`;
+
+// Schema.org: BlogPosting + BreadcrumbList (+ FAQPage, если есть FAQ).
+const blogPostingLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description,
+  url,
+  mainEntityOfPage: url,
+  image: new URL(ogImage, SITE.url).toString(),
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  inLanguage: SITE.lang,
+  author: {
+    '@type': 'Person',
+    name: AUTHOR.name,
+    alternateName: AUTHOR.nameEn,
+    url: `${SITE.url}/about`,
+    sameAs: AUTHOR.socials.map((s) => s.url),
+  },
+  publisher: {
+    '@type': 'Person',
+    name: AUTHOR.name,
+    url: SITE.url,
+  },
+  keywords: post.data.tags.join(', '),
+  articleSection: topic?.data.title,
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Блог', item: `${SITE.url}/blog` },
+    ...(topic
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: topic.data.title,
+            item: `${SITE.url}/topics/${topic.id}`,
+          },
+          { '@type': 'ListItem', position: 3, name: post.data.title, item: url },
+        ]
+      : [{ '@type': 'ListItem', position: 2, name: post.data.title, item: url }]),
+  ],
+};
+
+const faqLd = post.data.faq?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: post.data.faq.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
+---
+
+<Base
+  title={title}
+  description={description}
+  image={ogImage}
+  type="article"
+  jsonLd={[blogPostingLd, breadcrumbLd, ...(faqLd ? [faqLd] : [])]}
+>
+  <article class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
+    {/* Хлебные крошки */}
+    <nav aria-label="Хлебные крошки" class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <a href="/blog" class="meta-label hover:text-ink">Блог</a>
+      {topic && (
+        <>
+          <span class="meta-label" aria-hidden="true">/</span>
+          <a href={`/topics/${topic.id}`} class="meta-label text-accentink hover:underline underline-offset-4">
+            {topic.data.title}
+          </a>
+        </>
+      )}
+    </nav>
+
+    <h1 class="mt-5 font-serif text-[2.2rem] font-semibold leading-[1.12] tracking-tight sm:text-[3rem]">
+      {post.data.title}
+    </h1>
+
+    <div class="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b line pb-6">
+      <span class="meta-label">{AUTHOR.name}</span>
+      <time datetime={post.data.pubDate.toISOString()} class="meta-label">
+        {formatDate(post.data.pubDate)}
+      </time>
+      {
+        post.data.updatedDate && (
+          <span class="meta-label">
+            Обновлено: <time datetime={post.data.updatedDate.toISOString()}>{formatDate(post.data.updatedDate)}</time>
+          </span>
+        )
+      }
+      <span class="meta-label">{minutes} мин чтения</span>
+    </div>
+
+    {/* TL;DR — саммари для читателей и LLM. */}
+    {
+      post.data.tldr && (
+        <aside class="mt-8 border line bg-surface p-6" aria-label="Ключевые выводы">
+          <p class="meta-label">TL;DR — ключевые выводы</p>
+          <ul class="mt-4 space-y-2.5">
+            {post.data.tldr.map((item) => (
+              <li class="flex gap-3 text-[1.02rem] leading-relaxed">
+                <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-accentink" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+
+    <div class="prose mt-10">
+      <Content />
+    </div>
+
+    {/* FAQ-блок с разметкой FAQPage. */}
+    {
+      post.data.faq && post.data.faq.length > 0 && (
+        <section class="mt-14 border-t line pt-10">
+          <h2 class="font-serif text-3xl font-semibold tracking-tight">Частые вопросы</h2>
+          <div class="mt-6 divide-y divide-transparent">
+            {post.data.faq.map(({ q, a }) => (
+              <details class="group border-b line py-5">
+                <summary class="flex cursor-pointer list-none items-baseline justify-between gap-4 text-lg font-medium [&::-webkit-details-marker]:hidden">
+                  {q}
+                  <span class="shrink-0 font-mono text-muted transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p class="mt-3 leading-relaxed text-muted">{a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {/* Приложения: данные, таблицы, PDF (практика Damodaran). */}
+    {
+      post.data.attachments && post.data.attachments.length > 0 && (
+        <section class="mt-14 border line bg-surface p-6">
+          <p class="meta-label">Приложения к посту</p>
+          <ul class="mt-4 space-y-2.5">
+            {post.data.attachments.map(({ title, url }) => (
+              <li>
+                <a href={url} class="link-underline inline-flex items-center gap-2 text-[1rem]">
+                  <svg class="h-4 w-4 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  {title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {/* Теги */}
+    {
+      post.data.tags.length > 0 && (
+        <div class="mt-10 flex flex-wrap gap-2">
+          {post.data.tags.map((tag) => (
+            <span class="rounded-full border px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-muted" style="border-color: rgb(var(--c-line) / 0.2)">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+
+    {/* CTA подписки в конце поста. */}
+    <div class="mt-14">
+      <SubscribeForm compact />
+    </div>
+
+    {/* Об авторе */}
+    <aside class="mt-12 flex items-start gap-5 border-t line pt-8">
+      <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent font-serif text-xl font-semibold text-[#101010]" aria-hidden="true">
+        НШ
+      </div>
+      <div>
+        <p class="font-serif text-lg font-semibold">{AUTHOR.name}</p>
+        <p class="mt-1 text-[0.95rem] leading-relaxed text-muted">{AUTHOR.bio}</p>
+        <a href="/about" class="link-underline mt-2 inline-block font-mono text-[0.72rem] uppercase tracking-[0.12em] text-muted hover:text-ink">
+          Подробнее →
+        </a>
+      </div>
+    </aside>
+
+    {/* Связанные посты — внутренняя перелинковка. */}
+    {
+      related.length > 0 && (
+        <section class="mt-16">
+          <h2 class="meta-label mb-2">Читать дальше</h2>
+          <div>
+            {related.map((p) => (
+              <PostCard post={p} topics={topics} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </article>
+</Base>
