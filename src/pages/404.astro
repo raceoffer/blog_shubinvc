@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import { getPosts, getTopics } from '../utils/posts';
+
+const posts = (await getPosts()).slice(0, 3);
+const topics = await getTopics();
+---
+
+<Base title="Страница не найдена" noindex>
+  <section class="mx-auto max-w-3xl px-5 pt-20 sm:pt-28">
+    <p class="meta-label">Ошибка 404</p>
+    <h1 class="mt-4 font-serif text-[2.6rem] font-semibold leading-[1.08] tracking-tight sm:text-[3.4rem]">
+      Такой страницы нет. Зато есть хорошие посты.
+    </h1>
+    <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+      Возможно, ссылка устарела. Попробуйте поиск по архиву или начните с этих материалов.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a href="/blog" class="btn-primary">Поиск по архиву</a>
+      <a href="/" class="btn-secondary">На главную</a>
+    </div>
+
+    <div class="mt-16">
+      {posts.map((post) => <PostCard post={post} topics={topics} />)}
+    </div>
+  </section>
+</Base>

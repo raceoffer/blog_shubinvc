@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+import { AUTHOR, SITE } from '../consts';
+
+// Schema.org Person — «паспорт» эксперта для GEO (единый граф автора).
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: AUTHOR.name,
+  alternateName: AUTHOR.nameEn,
+  jobTitle: AUTHOR.role,
+  description: AUTHOR.bio,
+  url: `${SITE.url}/about`,
+  email: `mailto:${AUTHOR.email}`,
+  sameAs: AUTHOR.socials.map((s) => s.url),
+  knowsAbout: ['стартапы', 'венчурные инвестиции', 'продуктовый менеджмент', 'искусственный интеллект'],
+};
+---
+
+<Base
+  title="О Нике"
+  description={`${AUTHOR.name} — ${AUTHOR.role.toLowerCase()}. Биография, выступления, контакты и пресс-кит.`}
+  jsonLd={personLd}
+>
+  <section class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
+    <p class="meta-label">О Нике</p>
+    <h1 class="mt-4 font-serif text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[3rem]">
+      {AUTHOR.name}
+    </h1>
+    <p class="mt-3 text-xl leading-relaxed text-muted">{AUTHOR.role}</p>
+
+    <div class="prose mt-10">
+      <p>
+        Я предприниматель и инвестор: строил технологические компании, продавал их, ошибался,
+        начинал заново. Сейчас инвестирую в команды ранних стадий и помогаю фаундерам избегать
+        ошибок, которые стоили мне лет и миллионов.
+      </p>
+      <p>
+        Этот блог — моя «рабочая тетрадь»: разборы решений, цифры, таблицы и выводы, которые я
+        делаю для себя и своих портфельных компаний. Пишу так, как говорил бы с фаундером за
+        кофе: без корпоративного тона, с конкретикой и честными оговорками.
+      </p>
+
+      <h2>О чём я пишу</h2>
+      <ul>
+        <li><strong>Стартапы</strong> — строительство компании: найм, продажи, ошибки, пивоты.</li>
+        <li><strong>Продукт</strong> — метрики, retention, юнит-экономика, продуктовые решения.</li>
+        <li><strong>Искусственный интеллект</strong> — что реально работает в бизнесе, а что хайп.</li>
+        <li><strong>Венчур</strong> — как думают инвесторы, термшиты, раунды, капитализация.</li>
+      </ul>
+
+      <h2>Форматы</h2>
+      <p>
+        Короткие посты «одна мысль — один график» выходят почти каждую неделю. Раз в месяц —
+        длинное эссе. Раз в квартал — большое исследование с открытыми данными, которое можно
+        цитировать (например, <a href="/research">ежегодный обзор рынка</a>).
+      </p>
+
+      <h2>Выступления и медиа</h2>
+      <p>
+        Выступаю на отраслевых конференциях, веду воркшопы для акселераторов, комментирую
+        технологические тренды в медиа. Для запросов на выступления и интервью — пишите на
+        <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>.
+      </p>
+
+      <h2>Контакты</h2>
+      <p>
+        Быстрее всего — <a href={AUTHOR.socials[0].url}>Telegram</a>. Для длинных писем —
+        <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. Все профили: {' '}
+        {AUTHOR.socials.map((s, i) => (
+          <>
+            <a href={s.url} rel="me noopener" target="_blank">{s.label}</a>{i < AUTHOR.socials.length - 1 ? ' · ' : ''}
+          </>
+        ))}
+      </p>
+    </div>
+
+    <div class="mt-16">
+      <SubscribeForm compact />
+    </div>
+  </section>
+</Base>
