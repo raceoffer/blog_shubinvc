@@ -20,7 +20,7 @@ const topic = topics.find((t) => t.id === post.data.topic);
     <time datetime={post.data.pubDate.toISOString()} class="meta-label">
       {formatDate(post.data.pubDate)}
     </time>
-    <span class="meta-label">{readingTime(post.body ?? '')} мин</span>
+    <span class="meta-label">{readingTime(post.body ?? '')} min read</span>
   </div>
   <h3 class="mt-2.5 font-serif text-[1.55rem] font-semibold leading-snug tracking-tight">
     <a href={`/blog/${post.id}`} class="transition-colors group-hover:text-accentink" data-astro-prefetch>
@@ -32,6 +32,6 @@ const topic = topics.find((t) => t.id === post.data.topic);
     href={`/blog/${post.id}`}
     class="link-underline mt-3 inline-block font-mono text-[0.75rem] uppercase tracking-[0.12em] text-muted hover:text-ink"
   >
-    Читать →
+    Read more →
   </a>
 </article>

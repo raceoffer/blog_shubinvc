@@ -28,7 +28,7 @@ const pageTitle = title ? `${title} — ${SITE.shortTitle}` : SITE.title;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
 const imageUrl = new URL(image, SITE.url).toString();
 
-// Schema.org WebSite + SearchAction на всех страницах.
+// Schema.org WebSite + SearchAction on every page.
 const websiteLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -86,7 +86,7 @@ const websiteLd = {
       )
     }
 
-    {/* Тема до первой отрисовки — без мигания. Авто по системе + ручной переключатель. */}
+    {/* Theme applied before first paint — no flash. System-driven by default, manual override. */}
     <script is:inline>
       (() => {
         const stored = localStorage.getItem('theme');

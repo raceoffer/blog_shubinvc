@@ -13,7 +13,7 @@ const path = Astro.url.pathname;
       {SITE.shortTitle}
     </a>
 
-    <nav class="flex items-center gap-5" aria-label="Основная навигация">
+    <nav class="flex items-center gap-5" aria-label="Main navigation">
       {
         NAV.map(({ label, href }) => (
           <a
@@ -30,7 +30,7 @@ const path = Astro.url.pathname;
       <button
         id="theme-toggle"
         type="button"
-        aria-label="Переключить тёмную тему"
+        aria-label="Toggle dark mode"
         class="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:text-ink"
       >
         <svg class="h-[18px] w-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">

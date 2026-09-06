@@ -1,4 +1,4 @@
-/* Шрифты — self-hosted через Fontsource, subset latin+cyrillic, font-display: swap. */
+/* Fonts — self-hosted via Fontsource, latin subset, font-display: swap. */
 @import '@fontsource/eb-garamond/400.css';
 @import '@fontsource/eb-garamond/500.css';
 @import '@fontsource/eb-garamond/600.css';
@@ -15,17 +15,17 @@
 @tailwind utilities;
 
 /*
- * Палитра: тёплая бумага в светлой теме, глубокий графит в тёмной.
- * Один акцент — мягкий зелёный «маркер»; кнопки — контрастные чернильные.
+ * Palette: warm paper in light mode, deep graphite in dark.
+ * A single accent — a soft green "highlighter"; buttons are inky contrast.
  */
 :root {
   --c-bg: 245 242 239; /* #f5f2ef */
   --c-surface: 255 255 255;
   --c-text: 26 26 26; /* #1a1a1a */
   --c-muted: 128 125 122; /* #807d7a */
-  --c-line: 26 26 26; /* используется с alpha 0.1 */
-  --c-accent: 201 239 162; /* #c9efa2 — маркер-подсветка */
-  --c-accent-ink: 47 93 58; /* тёмно-зелёный для текста на акценте */
+  --c-line: 26 26 26; /* used with alpha 0.1 */
+  --c-accent: 201 239 162; /* #c9efa2 — highlighter accent */
+  --c-accent-ink: 47 93 58; /* dark green for text on the accent */
   --c-selection: 201 239 162;
 }
 
@@ -52,7 +52,7 @@ html.dark {
     font-size: 1.0625rem;
   }
 
-  /* Тонкие разделители вместо карточек — контент структурируют линии и воздух. */
+  /* Thin dividers instead of cards — structure comes from lines and air. */
   .line {
     border-color: rgb(var(--c-line) / 0.12);
   }
@@ -68,12 +68,12 @@ html.dark {
 }
 
 @layer components {
-  /* Метаданные: моноширинные uppercase-подписи. */
+  /* Metadata: monospace uppercase captions. */
   .meta-label {
     @apply font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-muted;
   }
 
-  /* Кнопка-пилюля: чернильная заливка, инверсия в тёмной теме. */
+  /* Pill button: inky fill, inverted in dark mode. */
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-[0.8rem] font-medium uppercase tracking-[0.12em] text-paper transition-transform duration-200 ease-out hover:-translate-y-px hover:scale-[1.02];
   }
@@ -89,7 +89,7 @@ html.dark {
     border-color: rgb(var(--c-text) / 0.7);
   }
 
-  /* Акцент-маркер для ключевых слов в заголовках. */
+  /* Highlighter accent for keywords in headlines. */
   .marker {
     background-image: linear-gradient(
       to top,
@@ -120,7 +120,7 @@ html.dark {
   }
 }
 
-/* Тёмная тема подсветки кода (Shiki dual themes). */
+/* Dark theme for code highlighting (Shiki dual themes). */
 html.dark .astro-code,
 html.dark .astro-code span {
   color: var(--shiki-dark) !important;
