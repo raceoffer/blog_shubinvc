@@ -67,7 +67,7 @@ draft: false           # true — excluded from the production build
 - **Pages:** `/` (hero + feed), `/about`, `/blog` (archive with search and topic filters), `/blog/[slug]`, `/topics/[topic]`, `/newsletter`, `/research`, `404`.
 - **SEO:** unique title/description, canonical, sitemap.xml, robots.txt, full-text RSS, Open Graph + Twitter Cards with auto-generated OG images, Schema.org (`BlogPosting`, `Person`, `BreadcrumbList`, `FAQPage`, `WebSite`+`SearchAction`).
 - **GEO:** `llms.txt`, semantic static HTML, TL;DR blocks, FAQ, Person markup with sameAs.
-- **Dark theme:** system-driven + manual toggle.
+- **Dark theme:** light by default, manual toggle in the header.
 - **Performance budget:** 0 JS on reading pages (search lives only in `/blog`), self-hosted subsetted fonts, inlined critical CSS.
 
 ## Customizing
@@ -86,3 +86,12 @@ draft: false           # true — excluded from the production build
 The subscribe form works via [Buttondown](https://buttondown.com): sign up and
 replace the username in `NEWSLETTER.action`. Double opt-in, list export and the
 RSS-to-email digest are configured in the Buttondown dashboard — no code changes needed.
+
+## Binary assets (photos, PDFs)
+
+Binary files are kept base64-encoded in `assets-src/` (e.g. `nik-shubin.jpg.b64`,
+large ones split as `.b64.part1`, `.part2`, …) so they survive any Git client.
+`scripts/prepare-assets.mjs` reassembles and decodes them into `public/`
+automatically before every `npm run dev` / `npm run build` (registered as
+`predev`/`prebuild` hooks). To add a new binary:
+`base64 -w 76 file.jpg > assets-src/file.jpg.b64` and commit that.
