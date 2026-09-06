@@ -7,18 +7,18 @@ const posts = (await getPosts()).slice(0, 3);
 const topics = await getTopics();
 ---
 
-<Base title="Страница не найдена" noindex>
+<Base title="Page not found" noindex>
   <section class="mx-auto max-w-3xl px-5 pt-20 sm:pt-28">
-    <p class="meta-label">Ошибка 404</p>
+    <p class="meta-label">Error 404</p>
     <h1 class="mt-4 font-serif text-[2.6rem] font-semibold leading-[1.08] tracking-tight sm:text-[3.4rem]">
-      Такой страницы нет. Зато есть хорошие посты.
+      This page doesn't exist. Good posts do.
     </h1>
     <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-      Возможно, ссылка устарела. Попробуйте поиск по архиву или начните с этих материалов.
+      The link may be outdated. Try searching the archive, or start with these.
     </p>
     <div class="mt-8 flex flex-wrap gap-4">
-      <a href="/blog" class="btn-primary">Поиск по архиву</a>
-      <a href="/" class="btn-secondary">На главную</a>
+      <a href="/blog" class="btn-primary">Search the archive</a>
+      <a href="/" class="btn-secondary">Back home</a>
     </div>
 
     <div class="mt-16">

@@ -3,28 +3,28 @@ import Base from '../layouts/Base.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
 import { AUTHOR, SITE } from '../consts';
 
-// Schema.org Person — «паспорт» эксперта для GEO (единый граф автора).
+// Schema.org Person — the expert "passport" for GEO (a unified author graph).
 const personLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: AUTHOR.name,
-  alternateName: AUTHOR.nameEn,
+  alternateName: AUTHOR.nameNative,
   jobTitle: AUTHOR.role,
   description: AUTHOR.bio,
   url: `${SITE.url}/about`,
   email: `mailto:${AUTHOR.email}`,
   sameAs: AUTHOR.socials.map((s) => s.url),
-  knowsAbout: ['стартапы', 'венчурные инвестиции', 'продуктовый менеджмент', 'искусственный интеллект'],
+  knowsAbout: ['startups', 'venture capital', 'product management', 'artificial intelligence'],
 };
 ---
 
 <Base
-  title="О Нике"
-  description={`${AUTHOR.name} — ${AUTHOR.role.toLowerCase()}. Биография, выступления, контакты и пресс-кит.`}
+  title="About Nick"
+  description={`${AUTHOR.name} — founder and investor. Bio, talks, contacts and press kit.`}
   jsonLd={personLd}
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
-    <p class="meta-label">О Нике</p>
+    <p class="meta-label">About Nick</p>
     <h1 class="mt-4 font-serif text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[3rem]">
       {AUTHOR.name}
     </h1>
@@ -32,42 +32,42 @@ const personLd = {
 
     <div class="prose mt-10">
       <p>
-        Я предприниматель и инвестор: строил технологические компании, продавал их, ошибался,
-        начинал заново. Сейчас инвестирую в команды ранних стадий и помогаю фаундерам избегать
-        ошибок, которые стоили мне лет и миллионов.
+        I'm a founder and investor: I've built tech companies, sold them, failed, and started
+        over. These days I invest in early-stage teams and help founders avoid the mistakes
+        that cost me years and millions.
       </p>
       <p>
-        Этот блог — моя «рабочая тетрадь»: разборы решений, цифры, таблицы и выводы, которые я
-        делаю для себя и своих портфельных компаний. Пишу так, как говорил бы с фаундером за
-        кофе: без корпоративного тона, с конкретикой и честными оговорками.
+        This blog is my working notebook: decision teardowns, numbers, tables and takeaways
+        I make for myself and my portfolio companies. I write the way I'd talk to a founder
+        over coffee: no corporate tone, just specifics and honest caveats.
       </p>
 
-      <h2>О чём я пишу</h2>
+      <h2>What I write about</h2>
       <ul>
-        <li><strong>Стартапы</strong> — строительство компании: найм, продажи, ошибки, пивоты.</li>
-        <li><strong>Продукт</strong> — метрики, retention, юнит-экономика, продуктовые решения.</li>
-        <li><strong>Искусственный интеллект</strong> — что реально работает в бизнесе, а что хайп.</li>
-        <li><strong>Венчур</strong> — как думают инвесторы, термшиты, раунды, капитализация.</li>
+        <li><strong>Startups</strong> — building a company: hiring, sales, mistakes, pivots.</li>
+        <li><strong>Product</strong> — metrics, retention, unit economics, product decisions.</li>
+        <li><strong>Artificial intelligence</strong> — what actually works in business vs. what's hype.</li>
+        <li><strong>Venture</strong> — how investors think, term sheets, rounds, cap tables.</li>
       </ul>
 
-      <h2>Форматы</h2>
+      <h2>Formats</h2>
       <p>
-        Короткие посты «одна мысль — один график» выходят почти каждую неделю. Раз в месяц —
-        длинное эссе. Раз в квартал — большое исследование с открытыми данными, которое можно
-        цитировать (например, <a href="/research">ежегодный обзор рынка</a>).
+        Short "one idea — one chart" posts come out almost weekly. Once a month — a long essay.
+        Once a quarter — a big research piece with open data you can cite (for example, the
+        <a href="/research">annual market overview</a>).
       </p>
 
-      <h2>Выступления и медиа</h2>
+      <h2>Talks and media</h2>
       <p>
-        Выступаю на отраслевых конференциях, веду воркшопы для акселераторов, комментирую
-        технологические тренды в медиа. Для запросов на выступления и интервью — пишите на
+        I speak at industry conferences, run workshops for accelerators and comment on tech
+        trends in the media. For speaking or interview requests, email
         <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>.
       </p>
 
-      <h2>Контакты</h2>
+      <h2>Contacts</h2>
       <p>
-        Быстрее всего — <a href={AUTHOR.socials[0].url}>Telegram</a>. Для длинных писем —
-        <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. Все профили: {' '}
+        Fastest is <a href={AUTHOR.socials[0].url}>Telegram</a>. For longer letters —
+        <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. All profiles: {' '}
         {AUTHOR.socials.map((s, i) => (
           <>
             <a href={s.url} rel="me noopener" target="_blank">{s.label}</a>{i < AUTHOR.socials.length - 1 ? ' · ' : ''}

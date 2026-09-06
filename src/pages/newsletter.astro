@@ -8,11 +8,11 @@ const posts = (await getPosts()).slice(0, 6);
 ---
 
 <Base
-  title="Рассылка"
+  title="Newsletter"
   description={`${NEWSLETTER.name}: ${NEWSLETTER.pitch}`}
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
-    <p class="meta-label">Рассылка</p>
+    <p class="meta-label">Newsletter</p>
     <h1 class="mt-4 font-serif text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[3rem]">
       {NEWSLETTER.name}
     </h1>
@@ -25,15 +25,15 @@ const posts = (await getPosts()).slice(0, 6);
     </div>
 
     <div class="prose mt-14">
-      <h2>Как это устроено</h2>
+      <h2>How it works</h2>
       <ul>
-        <li>Одно письмо в неделю — дайджест новых постов + заметки, которых нет на сайте.</li>
-        <li>Подтверждение подписки по email (double opt-in) — никакого спама.</li>
-        <li>Отписка в один клик, ваши данные не передаются третьим лицам.</li>
-        <li>Есть <a href="/rss.xml">RSS-фид полного текста</a> — для тех, кто читает в агрегаторах.</li>
+        <li>One email a week — a digest of new posts plus notes that never make it to the site.</li>
+        <li>Email-confirmed subscription (double opt-in) — no spam, ever.</li>
+        <li>One-click unsubscribe; your data is never shared with third parties.</li>
+        <li>There's a <a href="/rss.xml">full-text RSS feed</a> — for those who read in aggregators.</li>
       </ul>
 
-      <h2>Последние посты — за что подписываются</h2>
+      <h2>Latest posts — what you're subscribing to</h2>
     </div>
 
     <ul class="mt-4 divide-y divide-transparent border-t line">
@@ -45,7 +45,7 @@ const posts = (await getPosts()).slice(0, 6);
                 {p.data.title}
               </span>
               <time class="meta-label shrink-0" datetime={p.data.pubDate.toISOString()}>
-                {p.data.pubDate.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })}
+                {p.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
               </time>
             </a>
           </li>

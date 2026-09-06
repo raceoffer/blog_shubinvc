@@ -8,19 +8,19 @@ const topics = await getTopics();
 ---
 
 <Base
-  title="Исследования"
-  description="Флагманские исследования Ника Шубина: обзоры рынков, рейтинги и открытые данные, которые можно цитировать."
+  title="Research"
+  description="Nick Shubin's flagship research: market overviews, rankings and open data you can cite."
 >
   <section class="mx-auto max-w-3xl px-5 pt-12 sm:pt-16">
-    <p class="meta-label">Исследования</p>
+    <p class="meta-label">Research</p>
     <h1 class="mt-4 font-serif text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[3rem]">
-      Большие исследования
+      Big research pieces
     </h1>
     <div class="prose mt-6">
       <p>
-        Раз в квартал я публикую флагманский материал: обзор рынка, рейтинг или исследование
-        с открытыми данными. Все данные можно цитировать со ссылкой на shubin.vc — именно для
-        этого эти материалы и существуют.
+        Once a quarter I publish a flagship piece: a market overview, a ranking or a study
+        with open data. Everything can be cited with a link to shubin.vc — that's exactly
+        what these pieces are for.
       </p>
     </div>
 
@@ -28,7 +28,7 @@ const topics = await getTopics();
       {posts.length > 0 ? (
         posts.map((post) => <PostCard post={post} topics={topics} />)
       ) : (
-        <p class="text-muted">Первое исследование готовится — подпишитесь, чтобы не пропустить.</p>
+        <p class="text-muted">The first study is in the works — subscribe so you don't miss it.</p>
       )}
     </div>
   </section>
