@@ -1,61 +1,62 @@
 ---
-title: "Почему я больше не верю в «быстрый MVP»"
-description: "Догма «собери MVP за две недели и проверь гипотезу» устарела. Разбираю, когда MVP работает, когда убивает продукт, и что делать вместо него в 2026 году."
+title: "Why I No Longer Believe in the 'Fast MVP'"
+description: "The 'ship an MVP in two weeks and test the hypothesis' dogma is outdated. When MVPs work, when they kill products, and what to do instead in 2026."
 topic: startups
-tags: [mvp, стратегия, продукт]
+tags: [mvp, strategy, product]
 pubDate: 2026-03-02
 tldr:
-  - "MVP как догма устарел: планка «минимально жизнеспособного» выросла вместе с ожиданиями пользователей и падением стоимости разработки."
-  - "Сырая проверка гипотезы часто измеряет не спрос, а качество исполнения — вы хороните идею, которую убил плохой MVP."
-  - "Рабочая альтернатива: MLP (minimum lovable product) на узкой аудитории — маленький, но законченный продукт, который кто-то полюбит."
-  - "С ИИ-инструментами разница в стоимости между «коленкой» и «прилично» сократилась до недель — экономия на качестве перестала быть рациональной."
+  - "The MVP dogma is outdated: the bar for 'minimum viable' has risen with user expectations and the falling cost of development."
+  - "A scrappy hypothesis test often measures execution quality, not demand — you bury an idea your bad MVP killed."
+  - "The working alternative: an MLP (minimum lovable product) for a narrow audience — small but finished, something someone will love."
+  - "With AI tooling, the cost gap between 'slapdash' and 'decent' has shrunk to weeks — saving on quality is no longer rational."
 ---
 
-Десять лет «сделай MVP за две недели» был лучшим советом начинающему фаундеру.
-Сегодня я советую обратное — и хочу объяснить, что изменилось.
+For ten years, "build an MVP in two weeks" was the best advice for a first-time
+founder. Today I advise the opposite — and I want to explain what changed.
 
-## Что сломалось
+## What broke
 
-Идея MVP родилась в мире, где разработка была дорогой, а альтернатив у
-пользователя — мало. В этом мире логично потратить минимум денег, чтобы узнать,
-нужно ли вообще что-то делать.
+The MVP idea was born in a world where development was expensive and users had
+few alternatives. In that world, spending the minimum to learn whether anything
+should be built at all was logical.
 
-Оба условия исчезли. Разработка подешевела на порядок — с ИИ-инструментами
-команда из двух человек за месяц делает то, на что раньше уходил квартал.
-А пользователь сравнивает ваш MVP не с «отсутствием решения», а с Notion,
-Figma и ChatGPT — продуктами, отполированными тысячами человеко-лет.
+Both conditions are gone. Development got cheaper by an order of magnitude —
+with AI tools, a two-person team ships in a month what used to take a quarter.
+And the user compares your MVP not to "no solution" but to Notion, Figma and
+ChatGPT — products polished by thousands of person-years.
 
-## Главная опасность: ложноотрицательный результат
+## The main danger: the false negative
 
-Вот сценарий, который я наблюдал у портфельной команды. Гипотеза сильная,
-клиентские интервью — отличные. Собрали MVP за три недели: сыро, без
-онбординга, с вылетами. Запустили на сто человек из листа ожидания. Retention —
-2%. Вывод: «гипотеза не подтвердилась», пивот.
+Here's a scenario I watched at a portfolio team. Strong hypothesis, excellent
+customer interviews. They built an MVP in three weeks: raw, no onboarding,
+crashes. Launched to a hundred people from the waitlist. Retention — 2%.
+Conclusion: "hypothesis not confirmed," pivot.
 
-Через полгода конкурент сделал ту же идею — но с нормальным первым опытом.
-Раунд A через год. Гипотеза была верной; команда измеряла не спрос, а качество
-своего прототипа. Это самая дорогая ошибка подхода «быстро и сыро»: **вы не
-узнаёте, нужен ли продукт, — вы узнаёте, терпят ли люди плохой продукт.**
+Six months later a competitor did the same idea — but with a proper first
+experience. Series A within a year. The hypothesis was right; the team measured
+not demand but the quality of their prototype. This is the most expensive
+mistake of the "fast and scrappy" approach: **you don't learn whether the
+product is needed — you learn whether people tolerate a bad product.**
 
-## Что вместо: MLP для узкой аудитории
+## What instead: an MLP for a narrow audience
 
-Рабочая рамка 2026 года — minimum **lovable** product:
+The working framework of 2026 is the minimum **lovable** product:
 
-1. **Сузьте аудиторию до боли одного человека.** Не «малый бизнес», а
-   «бухгалтеры в e-commerce на маркетплейсах». Чем уже, тем проще быть лучшим.
-2. **Сделайте меньше, но законченно.** Одна задача, решённая до состояния
-   «вау, оно само», бьёт пять задач, решённых на троечку.
-3. **Первые десять пользователей должны расстроиться, если продукт закроется.**
-   Это и есть проверка гипотезы — не «поставили и ушли», а «просятся обратно».
+1. **Narrow the audience down to one person's pain.** Not "small business" but
+   "accountants in marketplace e-commerce." The narrower, the easier to be best.
+2. **Do less, but finish it.** One task solved to a "wow, it just does it"
+   state beats five tasks solved to a C-minus.
+3. **The first ten users must be upset if the product shuts down.** That's the
+   real hypothesis test — not "installed and left" but "asking to come back."
 
-## Когда MVP всё ещё работает
+## When an MVP still works
 
-Честности ради: есть случаи, где сырая проверка оправдана. Если гипотеза про
-спрос, а не про опыт (лендинг с кнопкой «купить»), если продукт внутренний и
-пользователь не выбирает, или если вы проверяете цену, а не ценность. Но это
-исключения. Правило по умолчанию в 2026-м: **узко и любимо, а не широко и
-сыро.**
+To be fair: there are cases where a scrappy test is justified. When the
+hypothesis is about demand, not experience (a landing page with a "buy" button);
+when the product is internal and the user has no choice; or when you're testing
+price, not value. But these are exceptions. The default rule in 2026: **narrow
+and loved, not broad and scrappy.**
 
-О том, как понять, что продукт любят, — в разборе [кривых
-удержания](/blog/retention-over-growth): плато на когортах — единственное
-доказательство, которому я верю.
+On how to tell that a product is loved — see the teardown of [retention
+curves](/blog/retention-over-growth): a cohort plateau is the only proof I
+believe.

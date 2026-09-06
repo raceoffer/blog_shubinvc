@@ -1,8 +1,8 @@
 ---
-title: Стартапы
-description: "Строительство компании с нуля: найм первых сотрудников, продажи, пивоты и ошибки, которые дорого стоят."
+title: Startups
+description: "Building a company from zero: hiring the first team, early sales, pivots and mistakes that cost real money."
 ---
 
-Как строить компанию с нуля: найм первой команды, первые продажи, пивоты и работа
-с ошибками. Всё — из практики, с цифрами и конкретными решениями, а не из книг
-о том, «как Apple начинался в гараже».
+How to build a company from zero: hiring the first team, first sales, pivots and
+working through mistakes. Everything here comes from practice — with numbers and
+concrete decisions, not from books about "how Apple started in a garage."

@@ -1,71 +1,72 @@
 ---
-title: "Как ИИ переписывает юнит-экономику: считаем на пальцах"
-description: "ИИ меняет не только продукты, но и структуру затрат стартапов. Разбираем на реальных цифрах, что происходит с COGS, валовой маржой и точкой безубыточности."
+title: "How AI Rewrites Unit Economics, With Actual Numbers"
+description: "AI changes not just products but the cost structure of startups. With real numbers: what happens to COGS, gross margin and the break-even point."
 topic: ai
-tags: [юнит-экономика, ии, метрики]
+tags: [unit-economics, ai, metrics]
 pubDate: 2026-07-14
 updatedDate: 2026-08-02
 tldr:
-  - "ИИ сдвигает структуру затрат: переменные расходы на поддержку и операционку падают, но появляется новая строка COGS — инференс."
-  - "В типичном B2B SaaS с ИИ-фичами валовая маржа падает с 80% до 65–70%, если не управлять стоимостью запросов."
-  - "Правило выживания: стоимость инференса на активного пользователя должна падать быстрее, чем растёт usage, — иначе масштабирование съест маржу."
-  - "Цены на инференс падают примерно в 10 раз в год — это работает на вас, если вы заложили это в модель, и против вас, если конкурент заложил, а вы нет."
+  - "AI shifts the cost structure: variable costs of support and ops fall, but a new COGS line appears — inference."
+  - "In a typical B2B SaaS with AI features, gross margin drops from 80% to 65–70% if you don't manage query costs."
+  - "The survival rule: inference cost per active user must fall faster than usage grows — otherwise scale eats the margin."
+  - "Inference prices fall roughly 10x per year — that works for you if you priced it into the model, and against you if your competitor did and you didn't."
 faq:
-  - q: "Как учитывать инференс в юнит-экономике?"
-    a: "Как переменные затраты (COGS), привязанные к активности пользователя. Считайте стоимость запроса на одного активного пользователя в месяц и закладывайте дефлятор: цены на инференс исторически падают примерно в 10 раз в год."
+  - q: "How should inference be accounted for in unit economics?"
+    a: "As variable costs (COGS) tied to user activity. Calculate query cost per active user per month and bake in a deflator: inference prices have historically fallen roughly 10x per year."
 attachments:
-  - title: "Шаблон юнит-экономики ИИ-продукта (CSV)"
+  - title: "AI product unit economics template (CSV)"
     url: "/attachments/ai-unit-economics-template.csv"
 ---
 
-Когда я показываю фаундерам свою таблицу юнит-экономики ИИ-продукта, реакция
-обычно одна: «так, а почему маржа 68%, а не 85%?» Потому что у SaaS с ИИ внутри
-появилась строка затрат, которой раньше не было, — и большинство команд делают
-вид, что её нет.
+When I show founders my AI product unit economics spreadsheet, the reaction is
+usually the same: "wait, why is the margin 68% and not 85%?" Because a SaaS with
+AI inside has a cost line that didn't exist before — and most teams pretend it
+isn't there.
 
-## Новая строка в COGS
+## The new COGS line
 
-Классический SaaS имел валовую маржу 75–85%: серверы, поддержка, немного
-третьих сервисов. У ИИ-продукта к этому добавляется **инференс** — стоимость
-каждого обращения к модели. И это не копейки:
+Classic SaaS ran at 75–85% gross margin: servers, support, some third-party
+services. An AI product adds **inference** — the cost of every call to the
+model. And it's not pocket change:
 
-| Сценарий | Инференс на активного пользователя/мес | Доля от среднего чека $99 |
+| Scenario | Inference per active user/mo | Share of a $99 avg price |
 |---|---|---|
-| Лёгкий (классификация, саммари) | $2–5 | 2–5% |
-| Средний (RAG, ассистенты) | $8–15 | 8–15% |
-| Тяжёлый (агенты, генерация) | $25–60 | 25–60% |
+| Light (classification, summaries) | $2–5 | 2–5% |
+| Medium (RAG, assistants) | $8–15 | 8–15% |
+| Heavy (agents, generation) | $25–60 | 25–60% |
 
-В тяжёлом сценарии валовая маржа легко опускается к 50–60% — уровню, который
-для SaaS считался бы катастрофой. Это не значит, что бизнес плохой. Это значит,
-что его нужно считать иначе.
+In the heavy scenario gross margin easily slides to 50–60% — a level that used
+to be a catastrophe for SaaS. That doesn't mean the business is bad. It means
+it has to be measured differently.
 
-## Единственный график, который имеет значение
+## The only chart that matters
 
-Возьмите два ряда за последние 12 месяцев: стоимость инференса на активного
-пользователя и usage (запросов на пользователя). Здоровая картина выглядит так:
-usage растёт, а стоимость — нет или падает. Это происходит за счёт трёх рычагов:
+Take two series for the last 12 months: inference cost per active user and
+usage (queries per user). A healthy picture looks like this: usage grows while
+cost stays flat or falls. That happens thanks to three levers:
 
-1. **Дефляция цен на модели.** Тот же класс запроса дешевеет примерно на порядок
-   в год. Это ветер в спину — но он дует всем, включая конкурентов.
-2. **Роутинг.** 80% запросов обычно можно обслужить моделью в 10 раз дешевле без
-   потери качества. Команды, которые построили роутинг раньше, живут с маржой
-   на 10–15 п.п. выше.
-3. **Кэширование и дистилляция.** Повторяющиеся запросы не должны уходить в
-   большую модель вообще.
+1. **Model price deflation.** The same class of query gets roughly an order of
+   magnitude cheaper per year. It's a tailwind — but it blows for everyone,
+   including your competitors.
+2. **Routing.** 80% of queries can usually be served by a model 10x cheaper
+   with no quality loss. Teams that built routing early live with a margin
+   10–15 p.p. higher.
+3. **Caching and distillation.** Repeat queries shouldn't hit the big model at
+   all.
 
-Если у вас обратная динамика — usage растёт быстрее, чем падает стоимость, — вы
-масштабируете убыток. Я видел компанию, у которой рост выручки в 3 раза привёл
-к росту расходов на инференс в 7 раз. Это не рост, это отсроченная проблема.
+If your dynamics are the opposite — usage growing faster than cost falls — you
+are scaling a loss. I've seen a company where 3x revenue growth came with 7x
+inference cost growth. That's not growth, it's a deferred problem.
 
-## Что это меняет для фаундера
+## What this changes for a founder
 
-Три практических следствия. Во-первых, **ценообразование должно быть привязано
-к потреблению**, хотя бы частично: флэт-фи при агентном сценарии — это способ
-раздавать маржу самым активным пользователям. Во-вторых, метрика «стоимость
-инференса / выручка» должна висеть на одном дашборде с MRR — я об этом писал в
-посте про [retention и метрики, которые важнее роста](/blog/retention-over-growth).
-В-третьих, в переговорах с инвесторами вопрос «а что с маржой?» — теперь
-вопрос про архитектуру, а не про Excel. Отвечайте роутингом, а не обещаниями.
+Three practical implications. First, **pricing must be tied to consumption**, at
+least partially: flat fees in an agentic scenario are a way to hand your margin
+to your most active users. Second, the "inference cost / revenue" metric belongs
+on the same dashboard as MRR — I wrote about this in the post on
+[retention and metrics that matter more than growth](/blog/retention-over-growth).
+Third, in investor conversations the "so what about margins?" question is now an
+architecture question, not an Excel question. Answer with routing, not promises.
 
-*Update: 2 августа 2026 — обновлены диапазоны стоимости инференса после
-снижения цен у двух крупнейших провайдеров.*
+*Update: August 2, 2026 — inference cost ranges updated after price cuts at the
+two largest providers.*

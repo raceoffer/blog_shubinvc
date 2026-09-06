@@ -1,57 +1,57 @@
 ---
-title: "Одна метрика, которая важнее роста: короткий разбор retention"
-description: "Один график — один вывод — один совет. Почему кривая удержания говорит о будущем продукта больше, чем рост выручки, и как её читать."
+title: "The One Metric That Matters More Than Growth: Retention, Briefly"
+description: "One chart — one takeaway — one piece of advice. Why the retention curve says more about a product's future than revenue growth, and how to read it."
 topic: product
-tags: [retention, метрики, рост]
+tags: [retention, metrics, growth]
 pubDate: 2026-05-12
 tldr:
-  - "Рост можно купить, удержание — нет: платный трафик маскирует отсутствие product-market fit ровно до конца денег."
-  - "Ключевой вопрос не «какой у нас retention», а «выходит ли кривая удержания на плато»."
-  - "Плато выше 20–30% на 8–12 неделе для B2B SaaS — сигнал, что продукт можно масштабировать; кривая, стремящаяся к нулю, — сигнал чинить ценность, а не лить трафик."
+  - "Growth can be bought; retention can't: paid traffic masks the absence of product-market fit exactly until the money runs out."
+  - "The key question isn't 'what's our retention' but 'does the retention curve flatten into a plateau.'"
+  - "A plateau above 20–30% at weeks 8–12 for B2B SaaS means the product can be scaled; a curve heading to zero means fix the value, don't pour traffic."
 ---
 
-Формат этого поста простой: один график, один вывод, один совет.
+This post has a simple format: one chart, one takeaway, one piece of advice.
 
-## График
+## The chart
 
-Представьте две когортные кривые удержания. Обе начинаются со 100%.
+Picture two cohort retention curves. Both start at 100%.
 
-**Продукт А:** 45% на первой неделе, 30% на четвёртой, 27% на восьмой, 26% на
-двенадцатой. Кривая прижалась к горизонтали.
+**Product A:** 45% in week one, 30% in week four, 27% in week eight, 26% in
+week twelve. The curve has settled against the horizontal.
 
-**Продукт Б:** 50% на первой неделе, 35% на четвёртой, 22% на восьмой, 14% на
-двенадцатой — и продолжает падать.
+**Product B:** 50% in week one, 35% in week four, 22% in week eight, 14% in
+week twelve — and still falling.
 
-У продукта Б каждая точка выше или сопоставима в первые недели. Но продукт А
-стоит дороже всех маркетинговых бюджетов мира, а продукт Б мёртв — он просто
-ещё не знает об этом.
+Product B matches or beats A at every early point. Yet product A is worth more
+than all the marketing budgets in the world, and product B is dead — it just
+doesn't know it yet.
 
-## Вывод
+## The takeaway
 
-**Значение retention в любой отдельной точке почти ничего не значит. Значит
-форма кривой.** Кривая, выходящая на плато, говорит: есть ядро пользователей,
-которым продукт нужен постоянно. Это и есть product-market fit — не опросы, не
-NPS, не «нам пишут, что продукт классный». Кривая, стремящаяся к нулю, говорит:
-каждый привлечённый пользователь рано или поздно уходит, и рост — это просто
-аренда пользователей за деньги.
+**The retention value at any single point means almost nothing. The shape of the
+curve means everything.** A curve that flattens into a plateau says: there's a
+core of users who need the product continuously. That *is* product-market fit —
+not surveys, not NPS, not "people write us that the product is great." A curve
+heading to zero says: every acquired user leaves sooner or later, and growth is
+just renting users for money.
 
-Поэтому первый вопрос, который я задаю фаундеру на встрече, — не «как растёте»,
-а «покажите когорты». Рост выручки на сыплющейся кривой — это замаскированный
-churn, оплаченный венчурными деньгами.
+That's why the first question I ask a founder isn't "how are you growing" but
+"show me the cohorts." Revenue growth on a collapsing curve is masked churn,
+paid for with venture money.
 
-## Совет
+## The advice
 
-Прежде чем увеличивать бюджет на привлечение, найдите плато. Постройте
-когортную кривую по неделям минимум за 12 недель и ответьте на три вопроса:
+Before you raise the acquisition budget, find the plateau. Build a weekly cohort
+curve for at least 12 weeks and answer three questions:
 
-1. Кривая выходит на горизонталь или продолжает падать?
-2. Где плато — выше или ниже 20–30% (для B2B SaaS; для consumer-подписок
-   ориентир другой, и он ниже)?
-3. Плато у новых когорт выше, чем у старых, или наоборот?
+1. Does the curve flatten out, or does it keep falling?
+2. Where is the plateau — above or below 20–30% (for B2B SaaS; consumer
+   subscriptions have a different, lower benchmark)?
+3. Is the plateau higher for new cohorts than for old ones — or the reverse?
 
-Если ответы вас радуют — лейте трафик смело. Если нет — каждый вложенный в
-маркетинг рубль откладывает встречу с реальностью. Чинить в этом случае нужно
-не воронку, а первые две недели опыта пользователя: [активацию и ценность первой
-сессии](/topics/product). А если вы строите ИИ-продукт, добавьте к этому
-[контроль стоимости инференса](/blog/ai-unit-economics) — удержание с умирающей
-маржой тоже не бизнес.
+If you like the answers — pour on the traffic, boldly. If not — every dollar
+spent on marketing postpones the meeting with reality. What needs fixing in
+that case isn't the funnel but the user's first two weeks: [activation and
+first-session value](/topics/product). And if you're building an AI product,
+add [inference cost control](/blog/ai-unit-economics) to that — retention with
+a dying margin isn't a business either.

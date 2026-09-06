@@ -1,8 +1,8 @@
 ---
-title: Искусственный интеллект
-description: "Что ИИ реально меняет в бизнесе: юнит-экономика, агенты, рынки. Без хайпа — с цифрами и разборами внедрений."
+title: Artificial Intelligence
+description: "What AI actually changes in business: unit economics, agents, markets. No hype — with numbers and implementation teardowns."
 ---
 
-Что искусственный интеллект реально меняет в бизнесе, а что остаётся хайпом.
-Разборы внедрений, экономика ИИ-продуктов, рынок агентов и обзоры — с открытыми
-данными и без магического мышления.
+What artificial intelligence actually changes in business — and what stays hype.
+Implementation teardowns, the economics of AI products, the agents market and
+overviews — with open data and no magical thinking.

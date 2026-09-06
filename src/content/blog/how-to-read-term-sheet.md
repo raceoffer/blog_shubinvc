@@ -1,76 +1,79 @@
 ---
-title: "Как читать термшит: гид для фаундера без юридического образования"
-description: "Термшит — две страницы, которые определяют вашу компанию на годы. Разбираю семь пунктов, где фаундеры теряют больше всего, и как торговаться."
+title: "How to Read a Term Sheet: A Founder's Guide Without a Law Degree"
+description: "A term sheet is two pages that define your company for years. The seven clauses where founders lose the most — and how to negotiate them."
 topic: venture
-tags: [термшит, раунд, инвестиции, переговоры]
+tags: [term-sheet, fundraising, venture, negotiation]
 pubDate: 2026-04-08
 faq:
-  - q: "Что важнее в термшите: оценка или условия?"
-    a: "Условия. Высокая оценка с тяжёлой ликвидационной привилегией, participating preferred и жёстким anti-dilution может оставить фаундеру меньше, чем скромная оценка на чистых условиях. Сравнивайте термшиты по итоговой выплате в сценариях выхода, а не по pre-money."
-  - q: "Что такое ликвидационная привилегия простыми словами?"
-    a: "Право инвестора при продаже компании сначала вернуть своё: вложенную сумму (1x non-participating — норма) или сумму плюс долю в остатке (participating — тяжёлое условие). При выходе ниже оценки раунда именно привилегия решает, сколько останется фаундеру."
-  - q: "Стоит ли торговаться по вестингу фаундера?"
-    a: "Да, если инвестор требует заново вестить долю фаундера, который уже годы в компании. Нормальный компромисс — зачесть пройденный период или сократить новый график. Полный перезапуск вестинга без уважительной причины — красный флаг."
+  - q: "What matters more in a term sheet: valuation or terms?"
+    a: "Terms. A high valuation with a heavy liquidation preference, participating preferred and harsh anti-dilution can leave a founder with less than a modest valuation on clean terms. Compare term sheets by the payout across exit scenarios, not by pre-money."
+  - q: "What is a liquidation preference in plain words?"
+    a: "The investor's right to get their money back first when the company is sold: the invested amount (1x non-participating — the norm) or the amount plus a share of the remainder (participating — a heavy term). In an exit below the round's valuation, the preference decides how much is left for the founder."
+  - q: "Should you negotiate founder vesting?"
+    a: "Yes, if the investor demands re-vesting a founder who has already been in the company for years. A fair compromise is crediting time served or shortening the new schedule. A full vesting restart without a good reason is a red flag."
 tldr:
-  - "Термшит — это не про оценку: семь пунктов условий влияют на вашу итоговую долю и контроль сильнее, чем цифра pre-money."
-  - "Ликвидационная привилегия 1x non-participating — норма; participating preferred — способ забрать у фаундера результат среднего выхода."
-  - "Опционный пул до раунда разбавляет вас, а не инвестора: торгуйтесь о размере пула, исходя из реального плана найма."
-  - "Единственный настоящий рычаг в переговорах — альтернатива: второй термшит или возможность не поднимать раунд."
+  - "A term sheet isn't about valuation: seven clauses shape your final stake and control more than the pre-money figure."
+  - "A 1x non-participating liquidation preference is the norm; participating preferred is a way to take the outcome of a middling exit away from the founder."
+  - "A pre-round option pool dilutes you, not the investor: negotiate the pool size from a real hiring plan."
+  - "The only real leverage in negotiation is an alternative: a second term sheet or the ability not to raise."
 ---
 
-Фаундеры готовятся к питчу неделями, а термшит подписывают за выходные. При
-этом питч влияет на то, будет ли сделка, а термшит — на то, чья это будет
-сделка. Разбираю пункты, где фаундеры теряют больше всего.
+Founders spend weeks preparing the pitch and sign the term sheet over a weekend.
+Yet the pitch decides whether the deal happens — and the term sheet decides
+whose deal it is. Here are the clauses where founders lose the most.
 
-## 1. Ликвидационная привилегия
+## 1. Liquidation preference
 
-Самый дорогой пункт после оценки. Норма рынка — **1x non-participating**:
-инвестор при выходе выбирает, что больше — вернуть вложенное или взять свою
-долю. Опасный вариант — **participating preferred**: инвестор возвращает
-вложенное *и* берёт долю в остатке. При выходе $50M после раунда $10M на $40M
-post разница для фаундера — миллионы долларов. Если видите participating —
-торгуйтесь или считайте сценарии выхода на калькуляторе до подписи.
+The most expensive clause after valuation. The market norm is **1x
+non-participating**: at exit, the investor takes whichever is larger — their
+money back or their percentage. The dangerous version is **participating
+preferred**: the investor gets their money back *and* their share of the
+remainder. On a $50M exit after a $10M round at $40M post, the difference for
+the founder is millions of dollars. If you see participating — negotiate, or
+model the exit scenarios on a calculator before signing.
 
-## 2. Опционный пул
+## 2. The option pool
 
-Классический ход: «расширим пул до 15% до раунда». Ключевое слово — **до**:
-разбавляются фаундеры, а не инвестор. Контрход: покажите реальный план найма на
-18 месяцев и предложите пул под него — обычно выходит 8–10%. Это самый простой
-пункт для торга, потому что здесь спор не про аппетиты, а про арифметику.
+The classic move: "let's expand the pool to 15% before the round." The key word
+is **before**: the dilution hits the founders, not the investor. The counter:
+show a real 18-month hiring plan and propose a pool to match — it usually comes
+out at 8–10%. This is the easiest clause to negotiate, because the argument here
+isn't appetites but arithmetic.
 
-## 3. Совет директоров
+## 3. The board
 
-Стандарт после seed/А: 2 места фаундерам, 1 инвестору, иногда 1 независимому.
-Опасная конфигурация — паритет или большинство внешних на ранней стадии: вы
-теряете контроль раньше, чем получаете пользу от «опытных директоров». И ещё:
-место в совете — это не советник. Советник помогает вам; директор голосует
-за ваше снятие.
+Standard after seed/A: 2 seats for founders, 1 for the investor, sometimes 1
+independent. A dangerous configuration is parity or an outside majority at an
+early stage: you lose control before you get the benefit of "experienced
+directors." Also: a board seat is not an advisor. An advisor helps you; a
+director votes on your removal.
 
 ## 4. Anti-dilution
 
-**Broad-based weighted average** — норма, соглашайтесь. **Full ratchet** —
-редкость и красный флаг: при даун-раунде конверсия пересчитывается по новой
-цене полностью, и разбавление фаундеров становится жестоким. Если инвестор
-настаивает на full ratchet — спросите себя, какой сценарий он закладывает.
+**Broad-based weighted average** — the norm, accept it. **Full ratchet** — rare
+and a red flag: in a down round, conversion is fully repriced, and founder
+dilution becomes brutal. If an investor insists on a full ratchet — ask yourself
+which scenario they're planning for.
 
-## 5. Вестинг фаундера
+## 5. Founder vesting
 
-Если вы три года в компании, а инвестор предлагает начать вестинг с нуля —
-это не «стандарт», это недоверие, оформленное пунктом. Зачёт пройденного
-периода или ускоренный график — нормальный компромисс.
+If you've been in the company three years and the investor proposes starting
+vesting from zero — that's not "standard," it's distrust written into a clause.
+Credit for time served or an accelerated schedule is a normal compromise.
 
-## 6. Pro-rata и право первого отказа
+## 6. Pro-rata and right of first refusal
 
-Pro-rata (право поддерживать долю в следующих раундах) — нормально для
-лид-инвестора. Но если pro-rata просят все мелкие участники раунда, в следующем
-раунде вам будет физически негде разместить новый фонд.
+Pro-rata (the right to maintain one's stake in later rounds) is normal for the
+lead investor. But if every small participant in the round asks for pro-rata,
+your next round will physically have no room for a new fund.
 
-## 7. Необязывающий характер
+## 7. Non-binding nature
 
-Помните: термшит не обязывает инвестора инвестировать. Пока нет договора,
-единственное, что ускоряет сделку, — конкуренция. Два термшита на столе
-превращают все пункты выше из «стандартов рынка» в предмет разговора.
+Remember: a term sheet doesn't oblige the investor to invest. Until there's a
+signed agreement, the only thing that speeds up a deal is competition. Two term
+sheets on the table turn every clause above from "market standard" into a
+conversation.
 
-Готовите раунд — почитайте и пост про [найм первых сотрудников](/blog/first-hires-mistakes):
-команда и план найма — это то, что определяет и размер опционного пула, и
-доверие инвестора.
+If you're preparing a round, also read the post on
+[hiring your first employees](/blog/first-hires-mistakes): the team and the
+hiring plan are what determine both the option pool size and investor trust.

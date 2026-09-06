@@ -1,8 +1,8 @@
 ---
-title: Продукт
-description: Продуктовые решения, метрики, retention и юнит-экономика — то, что отличает растущий продукт от красивой презентации.
+title: Product
+description: Product decisions, metrics, retention and unit economics — what separates a growing product from a pretty slide deck.
 ---
 
-Продуктовые решения, метрики и юнит-экономика. Retention, активация, воронки,
-pricing — всё то, что отличает растущий продукт от красивой презентации для
-инвесторов.
+Product decisions, metrics and unit economics. Retention, activation, funnels,
+pricing — everything that separates a growing product from a pretty slide deck
+for investors.

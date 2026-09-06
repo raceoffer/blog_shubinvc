@@ -1,88 +1,88 @@
-# shubin.vc — профессиональный блог Ника Шубина
+# shubin.vc — Nick Shubin's professional blog
 
-Личный экспертный блог-медиа: гибрид сайта-визитки и контентного архива.
-Статический сайт на **Astro + Tailwind**, хостинг — **Cloudflare Pages**.
+A personal expert blog-media: a hybrid of a personal site and a content archive.
+Static site built with **Astro + Tailwind**, hosted on **Cloudflare Pages**.
 
-## Быстрый старт
+## Quick start
 
 ```bash
 npm install
-npm run dev      # локальная разработка на :4321
-npm run build    # сборка в dist/
-npm run preview  # предпросмотр сборки
+npm run dev      # local dev server on :4321
+npm run build    # build to dist/
+npm run preview  # preview the build
 ```
 
-## Деплой на Cloudflare Pages
+## Deploy to Cloudflare Pages
 
-1. Подключите репозиторий в Cloudflare Pages (Workers & Pages → Create → Pages → Connect to Git).
-2. Настройки сборки:
+1. Connect the repository in Cloudflare Pages (Workers & Pages → Create → Pages → Connect to Git).
+2. Build settings:
    - **Build command:** `npm run build`
    - **Build output directory:** `dist`
-   - **Node version:** переменная окружения `NODE_VERSION=20`
-3. Подключите домен `shubin.vc` (Custom domains → Add).
+   - **Node version:** set the env var `NODE_VERSION=20`
+3. Attach the `shubin.vc` domain (Custom domains → Add).
 
-`_headers` и `_redirects` из `public/` подхватываются Pages автоматически.
+`_headers` and `_redirects` from `public/` are picked up by Pages automatically.
 
-## Как опубликовать пост (≤ 10 минут, без разработчика)
+## How to publish a post (≤ 10 minutes, no developer needed)
 
-1. Скопируйте любой пост из `src/content/blog/` и создайте `src/content/blog/moy-novyi-post.md` (имя файла = slug, латиница).
-2. Заполните frontmatter:
+1. Copy any post in `src/content/blog/` to `src/content/blog/my-new-post.md` (file name = slug, lowercase Latin).
+2. Fill in the frontmatter:
 
 ```yaml
 ---
-title: "Заголовок поста"
-description: "Лид на 2–3 предложения — идёт в карточку, meta description и превью."
-topic: startups        # одна рубрика: startups | product | ai | venture
-tags: [тег1, тег2]
+title: "Post title"
+description: "A 2–3 sentence lede — used in the card, meta description and link previews."
+topic: startups        # one topic: startups | product | ai | venture
+tags: [tag1, tag2]
 pubDate: 2026-09-06
-tldr:                  # 3–5 буллетов — обязательно (GEO)
-  - "Первый вывод."
-faq:                   # опционально — даёт разметку FAQPage
-  - q: "Вопрос?"
-    a: "Ответ."
-attachments:           # опционально — файлы лежат в public/attachments/
-  - title: "Датасет (CSV)"
+tldr:                  # 3–5 bullets — required (GEO)
+  - "First takeaway."
+faq:                   # optional — produces FAQPage markup
+  - q: "Question?"
+    a: "Answer."
+attachments:           # optional — files live in public/attachments/
+  - title: "Dataset (CSV)"
     url: "/attachments/file.csv"
-research: false        # true — пост попадёт в /research
-featured: false        # true — флагман на главной
-draft: false           # true — не попадёт в продакшен-сборку
+research: false        # true — the post appears in /research
+featured: false        # true — featured on the homepage
+draft: false           # true — excluded from the production build
 ---
 ```
 
-3. Пишите текст в Markdown ниже frontmatter. Обложки и OG-картинки (1200×630)
-   генерируются автоматически из заголовка и рубрики.
-4. `git push` → Cloudflare Pages соберёт и задеплоит превью ветки / продакшен main.
+3. Write the body in Markdown below the frontmatter. Covers and OG images (1200×630)
+   are generated automatically from the title and topic.
+4. `git push` → Cloudflare Pages builds and deploys a branch preview / production from main.
 
-### Чек-лист публикации (SEO/GEO)
+### Publishing checklist (SEO/GEO)
 
-- Title ≤ 60 симв., description ≤ 160 симв.
-- Slug — латиница, короткий, без стоп-слов (имя файла = slug).
-- TL;DR из 3–5 буллетов, ≥ 2 подзаголовка H2.
-- ≥ 2 внутренних ссылки на старые посты + 1 на рубрику.
-- При смене slug добавьте 301 в `public/_redirects`.
-- При обновлении поста поднимите `updatedDate`.
+- Title ≤ 60 chars, description ≤ 160 chars.
+- Slug — lowercase Latin, short, no stop words (file name = slug).
+- TL;DR with 3–5 bullets, ≥ 2 meaningful H2 subheadings.
+- ≥ 2 internal links to older posts + 1 to the topic page.
+- When changing a slug, add a 301 to `public/_redirects`.
+- When updating a post, bump `updatedDate`.
 
-## Что уже внутри
+## What's inside
 
-- **Страницы:** `/` (первый экран + лента), `/about`, `/blog` (архив с поиском и фильтром по рубрикам), `/blog/[slug]`, `/topics/[topic]`, `/newsletter`, `/research`, `404`.
-- **SEO:** уникальные title/description, canonical, sitemap.xml, robots.txt, RSS полного текста, Open Graph + Twitter Cards с автогенерацией OG-картинок, Schema.org (`BlogPosting`, `Person`, `BreadcrumbList`, `FAQPage`, `WebSite`+`SearchAction`).
-- **GEO:** `llms.txt`, семантический статический HTML, TL;DR-блоки, FAQ, разметка Person с sameAs.
-- **Тёмная тема:** авто по системе + ручной переключатель.
-- **Бюджет производительности:** 0 JS на страницах чтения (поиск — только в `/blog`), self-hosted шрифты с subset, инлайн критических стилей.
+- **Pages:** `/` (hero + feed), `/about`, `/blog` (archive with search and topic filters), `/blog/[slug]`, `/topics/[topic]`, `/newsletter`, `/research`, `404`.
+- **SEO:** unique title/description, canonical, sitemap.xml, robots.txt, full-text RSS, Open Graph + Twitter Cards with auto-generated OG images, Schema.org (`BlogPosting`, `Person`, `BreadcrumbList`, `FAQPage`, `WebSite`+`SearchAction`).
+- **GEO:** `llms.txt`, semantic static HTML, TL;DR blocks, FAQ, Person markup with sameAs.
+- **Dark theme:** system-driven + manual toggle.
+- **Performance budget:** 0 JS on reading pages (search lives only in `/blog`), self-hosted subsetted fonts, inlined critical CSS.
 
-## Настройка под себя
+## Customizing
 
-| Что | Где |
+| What | Where |
 |---|---|
-| Имя, описание, соцсети, email | `src/consts.ts` |
-| Рассылка (Buttondown action) | `src/consts.ts` → `NEWSLETTER.action` |
-| Рубрики и их описания | `src/content/topics/*.md` |
-| Палитра и шрифты | `src/styles/global.css`, `tailwind.config.mjs` |
-| Шаблон OG-картинок | `src/pages/og/[...slug].png.ts` |
-| Аналитика (Plausible/Umami) | добавить скрипт в `src/layouts/Base.astro` |
+| Name, description, socials, email | `src/consts.ts` |
+| Newsletter (Buttondown action) | `src/consts.ts` → `NEWSLETTER.action` |
+| Topics and their descriptions | `src/content/topics/*.md` |
+| Palette and fonts | `src/styles/global.css`, `tailwind.config.mjs` |
+| OG image template | `src/pages/og/[...slug].png.ts` |
+| Analytics (Plausible/Umami) | add the script in `src/layouts/Base.astro` |
 
-## Рассылка
+## Newsletter
 
-Форма подписки работает через [Buttondown](https://buttondown.com): зарегистрируйтесь,
-замените username в `NEWSLETTER.action`. Double opt-in, экспорт базы и RSS-to-email
-дайджест настраиваются в кабинете Buttondown — код менять не нужно.
+The subscribe form works via [Buttondown](https://buttondown.com): sign up and
+replace the username in `NEWSLETTER.action`. Double opt-in, list export and the
+RSS-to-email digest are configured in the Buttondown dashboard — no code changes needed.

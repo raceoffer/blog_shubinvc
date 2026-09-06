@@ -1,84 +1,84 @@
 ---
-title: "Рынок ИИ-агентов 2026: обзор 214 компаний и 9 сегментов"
-description: "Большое исследование рынка ИИ-агентов: 214 компаний, 9 сегментов, карта рынка, открытый датасет и выводы о том, куда движутся деньги."
+title: "The AI Agents Market 2026: 214 Companies, 9 Segments"
+description: "A deep-dive into the AI agents market: 214 companies, 9 segments, a market map, an open dataset and conclusions on where the money is moving."
 topic: ai
-tags: [исследование, ии-агенты, рынок, датасет]
+tags: [research, ai-agents, market, dataset]
 pubDate: 2026-08-20
 research: true
 featured: true
 tldr:
-  - "Мы собрали и классифицировали 214 компаний, строящих ИИ-агентов, и разбили их на 9 сегментов — от инфраструктуры оркестрации до вертикальных агентов в юриспруденции и медицине."
-  - "61% венчурных денег в сегменте уходит в инфраструктуру и горизонтальные платформы, но маржа и удержание лучше у вертикальных решений."
-  - "Средний чек вертикального агента вырос в 3,4 раза за 18 месяцев — с $190 до $650 в месяц на рабочее место."
-  - "Рынок перегрет в двух сегментах (код-ассистенты и SDR-агенты) и недооценён в двух (бэк-офис и комплаенс)."
-  - "Датасет исследования открыт — скачайте таблицу и используйте со ссылкой на этот пост."
+  - "We collected and classified 214 companies building AI agents, split into 9 segments — from orchestration infrastructure to vertical agents in legal and healthcare."
+  - "61% of venture money in the space goes to infrastructure and horizontal platforms, but margin and retention look better in vertical products."
+  - "The average seat price of a vertical agent grew 3.4x in 18 months — from $190 to $650 per month per seat."
+  - "The market is overheated in two segments (code assistants and SDR agents) and underrated in two (back office and compliance)."
+  - "The research dataset is open — download the table and use it with a link back to this post."
 faq:
-  - q: "Что считается ИИ-агентом в этом исследовании?"
-    a: "Продукт, который самостоятельно выполняет многошаговую задачу: планирует действия, вызывает инструменты и проверяет результат. Простые чат-боты и обёртки над одним LLM-запросом в выборку не входили."
-  - q: "Можно ли использовать датасет в своих материалах?"
-    a: "Да, датасет открыт. Единственное условие — ссылка на этот пост как на первоисточник. Данные обновляются раз в квартал."
-  - q: "Как вы оценивали размеры сегментов?"
-    a: "Через публичные раунды, выручку из открытых источников и интервью с фаундерами. Точность — порядковая: мы сравниваем сегменты между собой, а не называем абсолютные цифры рынка."
+  - q: "What counts as an AI agent in this research?"
+    a: "A product that autonomously completes a multi-step task: planning actions, calling tools and verifying the result. Plain chatbots and single-prompt LLM wrappers were excluded from the sample."
+  - q: "Can I use the dataset in my own materials?"
+    a: "Yes, the dataset is open. The only condition is a link to this post as the original source. The data is updated quarterly."
+  - q: "How did you estimate segment sizes?"
+    a: "Through public funding rounds, revenue from open sources and founder interviews. Precision is ordinal: we compare segments against each other rather than claiming absolute market sizes."
 attachments:
-  - title: "Датасет: компании рынка ИИ-агентов (CSV)"
+  - title: "Dataset: AI agents market companies (CSV)"
     url: "/attachments/ai-agents-2026-dataset.csv"
-  - title: "Методология исследования (Markdown)"
+  - title: "Research methodology (Markdown)"
     url: "/attachments/ai-agents-2026-methodology.md"
 ---
 
-Это первый выпуск ежегодного обзора рынка ИИ-агентов — флагманский формат этого
-блога. Мы потратили четыре месяца на сбор данных: 214 компаний, 9 сегментов,
-интервью с 23 фаундерами и 11 инвесторами. Датасет открыт — пользуйтесь и
-цитируйте.
+This is the first edition of the annual AI agents market overview — the flagship
+format of this blog. We spent four months collecting data: 214 companies,
+9 segments, interviews with 23 founders and 11 investors. The dataset is open —
+use it and cite it.
 
-## Почему именно агенты
+## Why agents
 
-2025 год сделал LLM-обёртки товаром: разница между «чат-ботом на GPT» и следующим
-чат-ботом на GPT — нулевая. Ценность сместилась в продукты, которые не отвечают
-на вопросы, а **выполняют работу**: проводят сделку через CRM, готовят пакет
-документов, закрывают месяц в бухгалтерии. Именно такие продукты мы и
-классифицировали.
+2025 turned LLM wrappers into a commodity: the difference between "a GPT
+chatbot" and the next GPT chatbot is zero. Value shifted to products that don't
+answer questions but **do the work**: pushing a deal through a CRM, preparing a
+document package, closing the month in accounting. Those are exactly the
+products we classified.
 
-## Девять сегментов рынка
+## The nine market segments
 
-| Сегмент | Компаний | Доля венчурных денег | Средний чек, $/мес |
+| Segment | Companies | Share of venture money | Avg seat price, $/mo |
 |---|---|---|---|
-| Инфраструктура оркестрации | 27 | 34% | 1 200 |
-| Код и инженерия | 41 | 19% | 45 |
-| Продажи и SDR | 38 | 12% | 380 |
-| Клиентская поддержка | 24 | 9% | 540 |
-| Юриспруденция и комплаенс | 17 | 6% | 890 |
-| Бэк-офис и финансы | 19 | 5% | 650 |
-| Медицина | 14 | 7% | 2 100 |
-| HR и рекрутинг | 18 | 4% | 410 |
-| Маркетинг и контент | 16 | 4% | 260 |
+| Orchestration infrastructure | 27 | 34% | 1,200 |
+| Code & engineering | 41 | 19% | 45 |
+| Sales & SDR | 38 | 12% | 380 |
+| Customer support | 24 | 9% | 540 |
+| Legal & compliance | 17 | 6% | 890 |
+| Back office & finance | 19 | 5% | 650 |
+| Healthcare | 14 | 7% | 2,100 |
+| HR & recruiting | 18 | 4% | 410 |
+| Marketing & content | 16 | 4% | 260 |
 
-Цифры — по публичным раундам и открытым данным о выручке; подробная методология
-приложена к посту.
+Figures are based on public rounds and open revenue data; the full methodology
+is attached to this post.
 
-## Три вывода, за которые я готов спорить
+## Three conclusions I'm willing to defend
 
-**Первый: инфраструктура берёт деньги, вертикали берут маржу.** Фонды любят
-платформы, потому что они понятны: «пиксель-аксессуары» для золотой лихорадки.
-Но у вертикальных агентов retention выше в полтора раза — они встроены в
-рабочий процесс, а не в стек.
+**First: infrastructure takes the money, verticals take the margin.** Funds love
+platforms because they're legible: picks and shovels for a gold rush. But
+vertical agents show one-and-a-half times higher retention — they're embedded in
+the workflow, not in the tech stack.
 
-**Второй: рынок SDR-агентов перегрет.** 38 компаний из 214 делают по сути одно и
-то же: «автоматический аутрич». Конверсии падают у всех одновременно, потому что
-получатель уже научился распознавать машинные письма. Через год здесь останется
-пять-семь игроков.
+**Second: the SDR agents market is overheated.** 38 of the 214 companies
+essentially do the same thing: "automated outreach." Conversion is falling for
+all of them at once, because recipients have learned to spot machine-written
+emails. In a year, five to seven players will remain.
 
-**Третий: бэк-офис — самый недооценённый сегмент.** Закрытие месяца, сверки,
-первичка — скучно, поэтому конкуренция низкая, а willingness to pay высокая:
-компании уже платят за эту работу людям, и агент, который делает её за треть
-цены, продаёт себя сам.
+**Third: back office is the most underrated segment.** Month-end close,
+reconciliation, primary documents — boring, so competition is low, while
+willingness to pay is high: companies already pay people for this work, and an
+agent that does it for a third of the price sells itself.
 
-## Что дальше
+## What's next
 
-Исследование обновляется раз в квартал: следующий апдейт — в ноябре 2026, с
-данными по выручке и churn. Если вы строите агента и хотите попасть в выборку —
-напишите мне. И да: всё это сначала выходит в [рассылке](/newsletter), а потом
-уже на сайте.
+The research is updated quarterly: the next update lands in November 2026 with
+revenue and churn data. If you're building an agent and want to be in the
+sample — write to me. And yes: all of this goes out in the
+[newsletter](/newsletter) first, and only then on the site.
 
-*Update: 28 августа 2026 — добавлены 9 компаний из сегмента медицины,
-скорректирована доля венчурных денег в инфраструктуре (34% вместо 31%).*
+*Update: August 28, 2026 — added 9 healthcare companies, corrected the
+infrastructure share of venture money (34% instead of 31%).*
