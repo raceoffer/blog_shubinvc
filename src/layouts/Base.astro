@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { SITE, AUTHOR } from '../consts';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import NewsletterPopup from '../components/NewsletterPopup.astro';
 
 interface Props {
   title?: string;
@@ -86,13 +87,10 @@ const websiteLd = {
       )
     }
 
-    {/* Theme applied before first paint — no flash. System-driven by default, manual override. */}
+    {/* Light theme by default; dark only when the user explicitly toggles it. */}
     <script is:inline>
       (() => {
-        const stored = localStorage.getItem('theme');
-        const dark = stored
-          ? stored === 'dark'
-          : matchMedia('(prefers-color-scheme: dark)').matches;
+        const dark = localStorage.getItem('theme') === 'dark';
         document.documentElement.classList.toggle('dark', dark);
       })();
     </script>
@@ -103,5 +101,6 @@ const websiteLd = {
       <slot />
     </main>
     <Footer />
+    <NewsletterPopup />
   </body>
 </html>

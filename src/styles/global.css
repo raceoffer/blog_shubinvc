@@ -89,24 +89,34 @@ html.dark {
     border-color: rgb(var(--c-text) / 0.7);
   }
 
-  /* Highlighter accent for keywords in headlines. */
-  .marker {
-    background-image: linear-gradient(
-      to top,
-      rgb(var(--c-accent)) 0.12em,
-      rgb(var(--c-accent)) 0.5em,
-      transparent 0.5em
-    );
-    padding: 0 0.08em;
+  /* Accent button for forms: the green highlighter becomes the action color. */
+  .btn-accent {
+    @apply inline-flex items-center gap-2 rounded-full px-6 py-3 font-mono text-[0.8rem] font-medium uppercase tracking-[0.12em] transition-all duration-200 ease-out hover:-translate-y-px;
+    background: rgb(var(--c-accent));
+    color: #1a1a1a;
+    box-shadow: 0 0 0 0 rgb(var(--c-accent) / 0);
   }
-  html.dark .marker {
-    color: #101010;
-    background-image: linear-gradient(
-      to top,
-      rgb(var(--c-accent)) 0.12em,
-      rgb(var(--c-accent)) 0.55em,
-      transparent 0.55em
-    );
+  .btn-accent:hover {
+    box-shadow: 0 6px 20px -6px rgb(var(--c-accent) / 0.7);
+  }
+
+  /* Form field: quiet border at rest, accent-ink border on focus. */
+  .field {
+    @apply flex-1 rounded-full border bg-paper px-5 py-3 text-[0.95rem] outline-none transition-colors placeholder:text-muted;
+    border-color: rgb(var(--c-line) / 0.25);
+  }
+  .field:focus {
+    border-color: rgb(var(--c-accent-ink));
+    box-shadow: 0 0 0 3px rgb(var(--c-accent) / 0.45);
+  }
+
+  /* Highlighter accent: full-height box behind the word, readable in both themes. */
+  .marker {
+    background-color: rgb(var(--c-accent));
+    color: #1a1a1a;
+    padding: 0.02em 0.12em 0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   .link-underline {

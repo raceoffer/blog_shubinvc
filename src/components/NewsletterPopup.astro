@@ -1,0 +1,66 @@
+---
+import { NEWSLETTER } from '../consts';
+---
+
+{/*
+  Newsletter popup: appears once per week per visitor (localStorage).
+  Shows 4s after page load, dismisses on close or subscribe.
+*/}
+<div
+  id="nl-popup"
+  class="fixed inset-x-4 bottom-4 z-50 hidden sm:inset-x-auto sm:bottom-6 sm:right-6"
+  role="dialog"
+  aria-label="Newsletter subscription"
+>
+  <div class="relative border line bg-surface p-6 shadow-[0_20px_60px_-20px_rgb(0_0_0/0.35)] sm:w-[22rem]">
+    <button
+      id="nl-popup-close"
+      type="button"
+      aria-label="Close"
+      class="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-muted transition-colors hover:text-ink"
+    >
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
+      </svg>
+    </button>
+    <p class="meta-label">{NEWSLETTER.name}</p>
+    <p class="mt-3 pr-6 font-serif text-[1.35rem] font-semibold leading-snug">
+      {NEWSLETTER.pitch}
+    </p>
+    <form action={NEWSLETTER.action} method="post" target="_blank" class="mt-5 flex flex-col gap-2.5">
+      <label class="sr-only" for="email-popup">Email</label>
+      <input
+        id="email-popup"
+        type="email"
+        name="email"
+        required
+        placeholder="you@example.com"
+        autocomplete="email"
+        class="field"
+      />
+      <button type="submit" class="btn-accent justify-center">Subscribe</button>
+    </form>
+    <p class="mt-4 text-[0.75rem] leading-relaxed text-muted">
+      Free, one email a week, one-click unsubscribe.
+    </p>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const KEY = 'nl_popup_seen';
+    const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+    const seen = Number(localStorage.getItem(KEY) || 0);
+    if (Date.now() - seen < WEEK_MS) return;
+
+    const popup = document.getElementById('nl-popup');
+    if (!popup) return;
+    const dismiss = () => {
+      popup.classList.add('hidden');
+      localStorage.setItem(KEY, String(Date.now()));
+    };
+    document.getElementById('nl-popup-close')?.addEventListener('click', dismiss);
+    popup.querySelector('form')?.addEventListener('submit', dismiss);
+    setTimeout(() => popup.classList.remove('hidden'), 4000);
+  })();
+</script>

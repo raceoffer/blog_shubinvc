@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
+import ShareBar from '../../components/ShareBar.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 import { AUTHOR, SITE } from '../../consts';
 import {
@@ -25,6 +26,16 @@ const all = await getPosts();
 const topics = await getTopics();
 const topic = topics.find((t) => t.id === post.data.topic);
 const related = relatedPosts(post, all);
+// Recommended: featured/research picks the author would point at, deduped against related.
+const recommended = all
+  .filter((p) => p.id !== post.id && !related.some((r) => r.id === p.id))
+  .sort(
+    (a, b) =>
+      Number(b.data.featured) - Number(a.data.featured) ||
+      Number(b.data.research) - Number(a.data.research) ||
+      b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+  )
+  .slice(0, 2);
 const minutes = readingTime(post.body ?? '');
 
 const title = post.data.seo?.title ?? post.data.title;
@@ -207,6 +218,11 @@ const faqLd = post.data.faq?.length
       )
     }
 
+    {/* Share */}
+    <div class="mt-10 border-t line pt-8">
+      <ShareBar url={url} title={post.data.title} />
+    </div>
+
     {/* Subscribe CTA at the end of the post. */}
     <div class="mt-14">
       <SubscribeForm compact />
@@ -226,11 +242,25 @@ const faqLd = post.data.faq?.length
       </div>
     </aside>
 
+    {/* Recommended picks — what to read after this one. */}
+    {
+      recommended.length > 0 && (
+        <section class="mt-16">
+          <h2 class="meta-label mb-2">Recommended</h2>
+          <div>
+            {recommended.map((p) => (
+              <PostCard post={p} topics={topics} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
     {/* Related posts — internal linking. */}
     {
       related.length > 0 && (
         <section class="mt-16">
-          <h2 class="meta-label mb-2">Read next</h2>
+          <h2 class="meta-label mb-2">Related posts</h2>
           <div>
             {related.map((p) => (
               <PostCard post={p} topics={topics} />
