@@ -1,43 +1,43 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Контент-модель поста — см. ТЗ п. 2.3.
-// Пост = структурированная сущность: slug, лид, рубрика, теги, TL;DR, FAQ, приложения.
+// Post content model.
+// A post is a structured entity: slug, lede, topic, tags, TL;DR, FAQ, attachments.
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
-    // Лид: идёт в карточку, meta description и превью в мессенджерах.
+    // Lede: used in the card, meta description and messenger previews.
     description: z.string().max(300),
-    // Рубрика (одна) — slug из коллекции topics.
+    // Topic (exactly one) — a slug from the topics collection.
     topic: z.string(),
     tags: z.array(z.string()).default([]),
     pubDate: z.coerce.date(),
-    // Дата обновления — выводится рядом с датой публикации (практика Damodaran).
+    // Updated date — shown next to the publish date (the Damodaran practice).
     updatedDate: z.coerce.date().optional(),
-    // TL;DR — 3–5 буллетов в начале поста (критично для GEO).
+    // TL;DR — 3–5 bullets at the top of the post (critical for GEO).
     tldr: z.array(z.string()).min(1).max(6).optional(),
-    // FAQ-блок — даёт разметку FAQPage и прямые ответы для AI-поисковиков.
+    // FAQ block — produces FAQPage markup and direct answers for AI search.
     faq: z
       .array(z.object({ q: z.string(), a: z.string() }))
       .max(6)
       .optional(),
-    // Приложения к посту: PDF, XLSX, датасеты (практика Damodaran).
+    // Post attachments: PDFs, spreadsheets, datasets (the Damodaran practice).
     attachments: z
       .array(z.object({ title: z.string(), url: z.string() }))
       .optional(),
-    // Ручное переопределение SEO-полей (по умолчанию берутся title/description).
+    // Manual SEO field overrides (defaults to title/description).
     seo: z
       .object({ title: z.string().optional(), description: z.string().optional() })
       .optional(),
-    // Флагманский материал — попадает в раздел /research.
+    // Flagship piece — appears in /research.
     research: z.boolean().default(false),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });
 
-// Рубрики как полноценные лендинги: уникальный текст + список постов (SEO).
+// Topics as full landing pages: unique text + post list (SEO).
 const topics = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/topics' }),
   schema: z.object({

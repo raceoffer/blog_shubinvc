@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Тёплая «бумажная» нейтральная палитра + один акцент.
+        // Warm "paper" neutral palette + a single accent.
         paper: 'rgb(var(--c-bg) / <alpha-value>)',
         ink: 'rgb(var(--c-text) / <alpha-value>)',
         muted: 'rgb(var(--c-muted) / <alpha-value>)',

@@ -3,7 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 export type Post = CollectionEntry<'blog'>;
 export type Topic = CollectionEntry<'topics'>;
 
-/** Все опубликованные посты, свежие сверху. */
+/** All published posts, newest first. */
 export async function getPosts(): Promise<Post[]> {
   const posts = await getCollection('blog', ({ data }) =>
     import.meta.env.PROD ? !data.draft : true,
@@ -19,13 +19,13 @@ export function postsByTopic(posts: Post[], topic: string): Post[] {
   return posts.filter((p) => p.data.topic === topic);
 }
 
-/** Время чтения: ~180 слов/мин для русского технического текста. */
+/** Reading time: ~200 words/min for English technical prose. */
 export function readingTime(body: string): number {
   const words = body.trim().split(/\s+/).length;
-  return Math.max(1, Math.round(words / 180));
+  return Math.max(1, Math.round(words / 200));
 }
 
-/** Связанные посты: та же рубрика, затем пересечение по тегам. */
+/** Related posts: same topic first, then tag overlap. */
 export function relatedPosts(current: Post, all: Post[], limit = 3): Post[] {
   const scored = all
     .filter((p) => p.id !== current.id)
@@ -41,7 +41,7 @@ export function relatedPosts(current: Post, all: Post[], limit = 3): Post[] {
 }
 
 export function formatDate(date: Date): string {
-  return date.toLocaleDateString('ru-RU', {
+  return date.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
