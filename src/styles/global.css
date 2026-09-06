@@ -1,0 +1,128 @@
+/* Шрифты — self-hosted через Fontsource, subset latin+cyrillic, font-display: swap. */
+@import '@fontsource/eb-garamond/400.css';
+@import '@fontsource/eb-garamond/500.css';
+@import '@fontsource/eb-garamond/600.css';
+@import '@fontsource/eb-garamond/700.css';
+@import '@fontsource/eb-garamond/400-italic.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Палитра: тёплая бумага в светлой теме, глубокий графит в тёмной.
+ * Один акцент — мягкий зелёный «маркер»; кнопки — контрастные чернильные.
+ */
+:root {
+  --c-bg: 245 242 239; /* #f5f2ef */
+  --c-surface: 255 255 255;
+  --c-text: 26 26 26; /* #1a1a1a */
+  --c-muted: 128 125 122; /* #807d7a */
+  --c-line: 26 26 26; /* используется с alpha 0.1 */
+  --c-accent: 201 239 162; /* #c9efa2 — маркер-подсветка */
+  --c-accent-ink: 47 93 58; /* тёмно-зелёный для текста на акценте */
+  --c-selection: 201 239 162;
+}
+
+html.dark {
+  --c-bg: 16 16 16; /* #101010 */
+  --c-surface: 24 24 24;
+  --c-text: 245 245 245; /* #f5f5f5 */
+  --c-muted: 110 110 110; /* #6e6e6e */
+  --c-line: 245 245 245;
+  --c-accent: 201 239 162;
+  --c-accent-ink: 201 239 162;
+  --c-selection: 63 98 73;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans;
+    font-size: 1.0625rem;
+  }
+
+  /* Тонкие разделители вместо карточек — контент структурируют линии и воздух. */
+  .line {
+    border-color: rgb(var(--c-line) / 0.12);
+  }
+
+  ::selection {
+    background: rgb(var(--c-selection));
+    color: #1a1a1a;
+  }
+
+  html.dark ::selection {
+    color: #f5f5f5;
+  }
+}
+
+@layer components {
+  /* Метаданные: моноширинные uppercase-подписи. */
+  .meta-label {
+    @apply font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-muted;
+  }
+
+  /* Кнопка-пилюля: чернильная заливка, инверсия в тёмной теме. */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-[0.8rem] font-medium uppercase tracking-[0.12em] text-paper transition-transform duration-200 ease-out hover:-translate-y-px hover:scale-[1.02];
+  }
+  html.dark .btn-primary {
+    @apply bg-paper text-ink;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-full border px-6 py-3 font-mono text-[0.8rem] font-medium uppercase tracking-[0.12em] transition-colors duration-200;
+    border-color: rgb(var(--c-line) / 0.25);
+  }
+  .btn-secondary:hover {
+    border-color: rgb(var(--c-text) / 0.7);
+  }
+
+  /* Акцент-маркер для ключевых слов в заголовках. */
+  .marker {
+    background-image: linear-gradient(
+      to top,
+      rgb(var(--c-accent)) 0.12em,
+      rgb(var(--c-accent)) 0.5em,
+      transparent 0.5em
+    );
+    padding: 0 0.08em;
+  }
+  html.dark .marker {
+    color: #101010;
+    background-image: linear-gradient(
+      to top,
+      rgb(var(--c-accent)) 0.12em,
+      rgb(var(--c-accent)) 0.55em,
+      transparent 0.55em
+    );
+  }
+
+  .link-underline {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgb(var(--c-muted) / 0.6);
+  }
+  .link-underline:hover {
+    text-decoration-color: rgb(var(--c-text));
+  }
+}
+
+/* Тёмная тема подсветки кода (Shiki dual themes). */
+html.dark .astro-code,
+html.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

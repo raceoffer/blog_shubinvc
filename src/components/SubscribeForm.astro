@@ -1,0 +1,37 @@
+---
+import { NEWSLETTER } from '../consts';
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['border line bg-surface', compact ? 'p-6' : 'p-8 sm:p-10']}>
+  <p class="meta-label">{NEWSLETTER.name}</p>
+  <p class:list={['mt-3 font-serif font-semibold leading-snug', compact ? 'text-xl' : 'text-2xl sm:text-3xl']}>
+    {NEWSLETTER.pitch}
+  </p>
+  <form
+    action={NEWSLETTER.action}
+    method="post"
+    target="_blank"
+    class="mt-6 flex flex-col gap-3 sm:flex-row"
+  >
+    <label class="sr-only" for={`email-${compact ? 'c' : 'f'}`}>Email</label>
+    <input
+      id={`email-${compact ? 'c' : 'f'}`}
+      type="email"
+      name="email"
+      required
+      placeholder="you@example.com"
+      autocomplete="email"
+      class="flex-1 rounded-full border bg-paper px-5 py-3 text-[0.95rem] outline-none transition-colors placeholder:text-muted focus:border-muted"
+      style="border-color: rgb(var(--c-line) / 0.25)"
+    />
+    <button type="submit" class="btn-primary justify-center">Подписаться</button>
+  </form>
+  <p class="mt-4 text-[0.8rem] leading-relaxed text-muted">
+    Бесплатно, одно письмо в неделю, отписка в один клик. Адреса не передаются третьим лицам.
+  </p>
+</div>

@@ -1,0 +1,37 @@
+---
+import { formatDate, readingTime, type Post, type Topic } from '../utils/posts';
+
+interface Props {
+  post: Post;
+  topics: Topic[];
+  eager?: boolean;
+}
+const { post, topics, eager = false } = Astro.props;
+const topic = topics.find((t) => t.id === post.data.topic);
+---
+
+<article class="group border-b line py-7 first:pt-0">
+  <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+    {topic && (
+      <a href={`/topics/${topic.id}`} class="meta-label text-accentink hover:underline underline-offset-4">
+        {topic.data.title}
+      </a>
+    )}
+    <time datetime={post.data.pubDate.toISOString()} class="meta-label">
+      {formatDate(post.data.pubDate)}
+    </time>
+    <span class="meta-label">{readingTime(post.body ?? '')} мин</span>
+  </div>
+  <h3 class="mt-2.5 font-serif text-[1.55rem] font-semibold leading-snug tracking-tight">
+    <a href={`/blog/${post.id}`} class="transition-colors group-hover:text-accentink" data-astro-prefetch>
+      {post.data.title}
+    </a>
+  </h3>
+  <p class="mt-2 leading-relaxed text-muted">{post.data.description}</p>
+  <a
+    href={`/blog/${post.id}`}
+    class="link-underline mt-3 inline-block font-mono text-[0.75rem] uppercase tracking-[0.12em] text-muted hover:text-ink"
+  >
+    Читать →
+  </a>
+</article>

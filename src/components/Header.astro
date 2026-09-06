@@ -1,0 +1,53 @@
+---
+import { NAV, SITE } from '../consts';
+
+const path = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b line bg-paper/90 backdrop-blur-sm">
+  <div class="mx-auto flex h-16 max-w-3xl items-center justify-between px-5">
+    <a
+      href="/"
+      class="font-serif text-xl font-semibold tracking-tight transition-opacity hover:opacity-70"
+    >
+      {SITE.shortTitle}
+    </a>
+
+    <nav class="flex items-center gap-5" aria-label="Основная навигация">
+      {
+        NAV.map(({ label, href }) => (
+          <a
+            href={href}
+            class:list={[
+              'hidden text-[0.92rem] transition-colors hover:text-ink sm:inline',
+              path.startsWith(href) ? 'text-ink underline underline-offset-4 decoration-1' : 'text-muted',
+            ]}
+          >
+            {label}
+          </a>
+        ))
+      }
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Переключить тёмную тему"
+        class="flex h-8 w-8 items-center justify-center rounded-full text-muted transition-colors hover:text-ink"
+      >
+        <svg class="h-[18px] w-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" />
+          <path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" stroke-linecap="round" />
+        </svg>
+        <svg class="hidden h-[18px] w-[18px] dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+</script>
