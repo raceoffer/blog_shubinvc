@@ -1,4 +1,4 @@
-# Cloudflare Pages: заголовки безопасности и кэширования
+# Cloudflare Pages: security and caching headers
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY

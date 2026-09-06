@@ -1,9 +1,9 @@
-Параметр,Значение,Формула/комментарий
-Средний чек (ARPU); $/мес,99,
-Инференс на активного пользователя; $/мес,12,роутинг + кэширование снижают на 30-60%
-Инфраструктура на пользователя; $/мес,2,
-Поддержка на пользователя; $/мес,4,
-Валовая маржа; %,=(99-12-2-4)/99,цель: >= 65%
-Дефлятор цен инференса; в год,0.1,исторически цены падают ~10x в год
+Parameter,Value,Formula/comment
+Average price (ARPU); $/mo,99,
+Inference per active user; $/mo,12,routing + caching cut this by 30-60%
+Infrastructure per user; $/mo,2,
+Support per user; $/mo,4,
+Gross margin; %,=(99-12-2-4)/99,target: >= 65%
+Inference price deflator; per year,0.1,historically prices fall ~10x per year
 CAC; $,300,
-Срок окупаемости CAC; мес,=CAC/(ARPU*маржа),цель: <= 12 мес
+CAC payback; months,=CAC/(ARPU*margin),target: <= 12 months

@@ -3,7 +3,7 @@ import type { APIRoute } from 'astro';
 import { AUTHOR, SITE } from '../consts';
 import { getPosts, getTopics } from '../utils/posts';
 
-// RSS полного текста — важно и для читателей, и для GEO.
+// Full-text RSS — valuable for readers and GEO alike.
 export const GET: APIRoute = async () => {
   const posts = await getPosts();
   const topics = await getTopics();
@@ -23,6 +23,6 @@ export const GET: APIRoute = async () => {
         ...post.data.tags,
       ].filter(Boolean),
     })),
-    customData: `<language>ru</language>`,
+    customData: `<language>en</language>`,
   });
 };

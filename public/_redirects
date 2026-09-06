@@ -1,4 +1,4 @@
-# 301-редиректы при смене slug (ТЗ п. 3.3).
-# Формат: /старый-путь /новый-путь 301
-# Пример:
-# /blog/staryi-slug /blog/novyi-slug 301
+# 301 redirects when slugs change.
+# Format: /old-path /new-path 301
+# Example:
+# /blog/old-slug /blog/new-slug 301

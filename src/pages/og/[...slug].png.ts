@@ -3,8 +3,8 @@ import sharp from 'sharp';
 import { AUTHOR, SITE } from '../../consts';
 import { getPosts, getTopics } from '../../utils/posts';
 
-// Автогенерация OG-картинок 1200×630 из заголовка поста и рубрики (ТЗ п. 3.3).
-// Генерируются на этапе сборки — в рантайме это статические PNG на CDN.
+// Auto-generated OG images 1200×630 from post title and topic.
+// Generated at build time — at runtime these are static PNGs on the CDN.
 
 function escapeXml(s: string): string {
   return s.replace(/[<>&'"]/g, (c) =>
@@ -12,7 +12,7 @@ function escapeXml(s: string): string {
   );
 }
 
-/** Грубый перенос строк: оценка ширины 0.68em для кириллического serif. */
+/** Rough word wrap: DejaVu Serif bold is wide — budget ~0.62em per char. */
 function wrap(text: string, maxChars: number): string[] {
   const words = text.split(' ');
   const lines: string[] = [];
@@ -31,11 +31,10 @@ function wrap(text: string, maxChars: number): string[] {
 }
 
 function ogSvg(title: string, label: string): string {
-  // Кириллический serif шире латиницы: ~0.68em на символ — закладываем запас.
-  const lines = wrap(title, 22);
-  const fontSize = lines.length >= 4 ? 54 : 62;
+  const lines = wrap(title, 26);
+  const fontSize = lines.length >= 4 ? 50 : 56;
   const lineHeight = fontSize + 16;
-  // Первая базовая линия: ниже плашки рубрики, блок заголовка центрирован в зоне 240–500.
+  // First baseline: below the topic chip, title block centered in the 240–500 zone.
   let startY = 355 - ((lines.length - 1) * lineHeight) / 2;
   startY = Math.max(startY, 262);
   const tspans = lines
@@ -50,7 +49,7 @@ function ogSvg(title: string, label: string): string {
     .domain { font: 500 26px 'DejaVu Sans', sans-serif; fill: #807d7a; }
   </style>
   <rect width="1200" height="630" fill="#f5f2ef"/>
-  <rect x="90" y="150" width="${Math.min(40 + label.length * 22, 1020)}" height="44" fill="#c9efa2"/>
+  <rect x="90" y="150" width="${Math.min(48 + label.length * 19, 1020)}" height="44" fill="#c9efa2"/>
   <text x="104" y="181" class="label">${escapeXml(label.toUpperCase())}</text>
   ${tspans}
   <text x="90" y="560" class="author">${escapeXml(AUTHOR.name)}</text>
@@ -61,7 +60,7 @@ function ogSvg(title: string, label: string): string {
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getPosts();
   return [
-    { params: { slug: 'default' }, props: { title: SITE.title, label: 'Блог' } },
+    { params: { slug: 'default' }, props: { title: SITE.title, label: 'Blog' } },
     ...posts.map((post) => ({
       params: { slug: post.id },
       props: { title: post.data.title, label: '' },
@@ -77,8 +76,8 @@ export const GET: APIRoute = async ({ props }) => {
     const topics = await getTopics();
     const post = posts.find((p) => p.data.title === title);
     resolvedLabel = post
-      ? (topics.find((t) => t.id === post.data.topic)?.data.title ?? 'Пост')
-      : 'Блог';
+      ? (topics.find((t) => t.id === post.data.topic)?.data.title ?? 'Post')
+      : 'Blog';
   }
 
   const png = await sharp(Buffer.from(ogSvg(title, resolvedLabel))).png().toBuffer();

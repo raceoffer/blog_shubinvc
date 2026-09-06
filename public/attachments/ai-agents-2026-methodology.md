@@ -1,31 +1,30 @@
-# Методология исследования «Рынок ИИ-агентов 2026»
+# Methodology — "The AI Agents Market 2026" research
 
-Источник: https://shubin.vc/blog/ai-agents-market-2026 — цитировать со ссылкой.
+Source: https://shubin.vc/blog/ai-agents-market-2026 — please cite with a link.
 
-## Выборка
+## Sample
 
-214 компаний, чьи продукты самостоятельно выполняют многошаговые задачи:
-планируют действия, вызывают инструменты и проверяют результат. Чат-боты
-и однозапросные обёртки над LLM в выборку не входили.
+214 companies whose products autonomously complete multi-step tasks: planning
+actions, calling tools and verifying the result. Chatbots and single-prompt LLM
+wrappers were excluded from the sample.
 
-## Источники данных
+## Data sources
 
-- публичные раунды и пресс-релизы;
-- открытые данные о выручке и тарифах;
-- 23 интервью с фаундерами и 11 интервью с инвесторами (январь–июль 2026).
+- public funding rounds and press releases;
+- open revenue and pricing data;
+- 23 founder interviews and 11 investor interviews (January–July 2026).
 
-## Сегментация
+## Segmentation
 
-9 сегментов по основному рабочему процессу продукта: инфраструктура
-оркестрации, код и инженерия, продажи и SDR, клиентская поддержка,
-юриспруденция и комплаенс, бэк-офис и финансы, медицина, HR и рекрутинг,
-маркетинг и контент.
+9 segments by the product's core workflow: orchestration infrastructure,
+code & engineering, sales & SDR, customer support, legal & compliance,
+back office & finance, healthcare, HR & recruiting, marketing & content.
 
-## Метрики
+## Metrics
 
-- Средний чек: медиана публичных тарифов, пересчёт на рабочее место в месяц.
-- Доля венчурных денег: сумма публичных раундов сегмента / сумма всех раундов выборки.
+- Average seat price: median of public pricing, normalized per seat per month.
+- Share of venture money: the segment's total public funding / the sample's total funding.
 
-## Обновления
+## Updates
 
-Раз в квартал. Актуальная версия и дата — на странице исследования.
+Quarterly. The current version and date live on the research page.

@@ -1,16 +1,16 @@
 company,segment,country,founded,funding_usd_m,price_usd_mo
-Company 001,Оркестрация,US,2023,12.5,1200
-Company 002,Оркестрация,US,2022,45.0,1200
-Company 003,Оркестрация,UK,2024,6.2,1150
-Company 004,Код и инженерия,US,2023,28.0,45
-Company 005,Код и инженерия,DE,2022,15.4,49
-Company 006,Продажи и SDR,US,2024,8.1,380
-Company 007,Продажи и SDR,IL,2023,11.0,395
-Company 008,Поддержка,US,2022,22.3,540
-Company 009,Юриспруденция и комплаенс,UK,2023,9.8,890
-Company 010,Бэк-офис и финансы,US,2024,5.5,650
-Company 011,Медицина,US,2022,34.0,2100
-Company 012,HR,FR,2023,4.2,410
-Company 013,Маркетинг,US,2024,3.1,260
-# Демо-версия датасета (первые 13 строк). Полная версия — в рассылке и по запросу: hi@shubin.vc
-# Источник: https://shubin.vc/blog/ai-agents-market-2026 — цитировать со ссылкой.
+Company 001,Orchestration,US,2023,12.5,1200
+Company 002,Orchestration,US,2022,45.0,1200
+Company 003,Orchestration,UK,2024,6.2,1150
+Company 004,Code & Engineering,US,2023,28.0,45
+Company 005,Code & Engineering,DE,2022,15.4,49
+Company 006,Sales & SDR,US,2024,8.1,380
+Company 007,Sales & SDR,IL,2023,11.0,395
+Company 008,Customer Support,US,2022,22.3,540
+Company 009,Legal & Compliance,UK,2023,9.8,890
+Company 010,Back Office & Finance,US,2024,5.5,650
+Company 011,Healthcare,US,2022,34.0,2100
+Company 012,HR & Recruiting,FR,2023,4.2,410
+Company 013,Marketing & Content,US,2024,3.1,260
+# Demo version of the dataset (first 13 rows). Full version — in the newsletter and on request: hi@shubin.vc
+# Source: https://shubin.vc/blog/ai-agents-market-2026 — please cite with a link.

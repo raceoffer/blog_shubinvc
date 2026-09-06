@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# AI-краулеры: явно разрешаем индексацию для GEO
+# AI crawlers: explicitly allowed for GEO
 User-agent: GPTBot
 Allow: /
 
