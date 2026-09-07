@@ -2,7 +2,7 @@
 // (Inter, warm paper background, thin rules, brand arrow).
 import { esc, User } from './types';
 
-export const ARROW_SVG = `<svg width="20" height="20" viewBox="0 0 100 100" aria-hidden="true"><polygon points="0,0 49.7,0 76.5,26.2 0,100" fill="#bbe8ed"/><polygon points="0,100 74.7,25.1 99.7,50 49.7,100" fill="#c7ddf9"/></svg>`;
+export const ARROW_SVG = `<svg width="20" height="20" viewBox="0 0 100 100" aria-hidden="true"><polygon points="0,22 60,22 100,50 24,50" fill="#1a1a1a"/><polygon points="24,50 100,50 60,78 0,78" fill="#2f5d3a"/></svg>`;
 
 export function page(title: string, user: User | null, body: string): string {
   return `<!doctype html>
@@ -16,7 +16,7 @@ export function page(title: string, user: User | null, body: string): string {
 <style>
   :root {
     --paper:#faf9f6; --surface:#fff; --ink:#1a1a1a; --muted:#6b6b66; --line:#e4e2dc;
-    --accent:#c9efa2; --accent-ink:#2c4a12; --cyan:#bbe8ed; --blue:#c7ddf9;
+    --accent:#c9efa2; --accent-ink:#2c4a12;
     --danger:#b3382c; --ok:#2e7d32;
   }
   * { box-sizing:border-box; margin:0; }
@@ -56,7 +56,7 @@ export function page(title: string, user: User | null, body: string): string {
   .row > * { flex:1; min-width:180px; }
   .badge { display:inline-block; padding:2px 10px; border-radius:999px; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
   .b-draft { background:#eeece6; color:var(--muted); }
-  .b-review { background:var(--cyan); color:#155a60; }
+  .b-review { background:var(--surface); color:var(--accent-ink); box-shadow:inset 0 0 0 1.5px var(--accent-ink); }
   .b-published { background:var(--accent); color:var(--accent-ink); }
   .b-rejected { background:#f6d5d1; color:var(--danger); }
   .flash { padding:12px 16px; border-radius:8px; margin-bottom:18px; font-size:.9rem; }
