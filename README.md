@@ -122,22 +122,26 @@ AES-GCM-encrypted with the `TOKEN_KEY` secret.
 ### Setup (one time, ~10 minutes)
 
 ```bash
-npm i -D wrangler
-wrangler login
+npm install          # wrangler is a devDependency
+npx wrangler login
 
 # 1. Database
 wrangler d1 create shubinvc-admin            # copy database_id into wrangler.toml
-wrangler d1 execute shubinvc-admin --remote --file=admin/schema.sql
+wrangler d1 execute shindenvc-admin --remote --file=admin/schema.sql
 
 # 2. KV for images/challenges
 wrangler kv namespace create ADMIN_KV        # copy id into wrangler.toml
 
 # 3. Secrets
-wrangler pages secret put GITHUB_TOKEN --project-name blog-shubinvc
+wrangler secret put GITHUB_TOKEN
 #     fine-grained PAT with Contents: Read & Write on this repo
-wrangler pages secret put TOKEN_KEY --project-name blog-shubinvc
+wrangler secret put TOKEN_KEY
 #     64 random hex chars:  openssl rand -hex 32
 ```
+
+(The project deploys via **Workers Builds**: `npm run build` compiles the
+Astro site to `dist/` *and* the `functions/` admin to `.worker/`, then
+`npx wrangler deploy` ships both — config in `wrangler.toml`.)
 
 Deploy → open `https://shubin.vc/admin/setup` → create the first administrator
 (the page locks itself once a user exists) → log in → Settings → register a
@@ -152,7 +156,7 @@ extra to do. Google: the old sitemap ping endpoint no longer exists (retired in
 2024), so the reliable channel is the fresh `<lastmod>` in the sitemap. If you
 want the extra push, create a Google Cloud service account with the Indexing
 API enabled, add it as an owner of the Search Console property, and set
-`wrangler pages secret put GOOGLE_SA_JSON` — every publish will then send
+`wrangler secret put GOOGLE_SA_JSON` — every publish will then send
 `URL_UPDATED` for the post (note: the API is officially intended for
 job/streaming pages, sitemap remains the primary mechanism).
 
