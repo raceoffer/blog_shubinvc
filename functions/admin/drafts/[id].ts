@@ -4,8 +4,7 @@ import { Env, User, Draft, esc, redirect, slugify } from '../../lib/types';
 import { page, html, flash, withMsg } from '../../lib/layout';
 import { audit, requireAdmin } from '../../lib/auth';
 import { NETWORKS, Network, defaultText } from '../../lib/crosspost';
-
-const TOPICS = ['startups', 'product', 'ai', 'venture'];
+import { getTopics } from '../../lib/topics';
 
 function canEdit(user: User, d: Draft): boolean {
   if (user.role === 'admin') return true;
@@ -27,6 +26,12 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request, params, d
   const tags = (JSON.parse(d.tags || '[]') as string[]).join(', ');
   const faq = d.faq && d.faq !== '[]' ? d.faq : '';
   const social = JSON.parse(d.social || '{}');
+
+  // Managed topics; keep the draft's current topic selectable even if removed.
+  const topics = await getTopics(env);
+  if (d.topic && !topics.some((t) => t.slug === d.topic)) {
+    topics.push({ slug: d.topic, title: `${d.topic} (legacy)`, description: '' });
+  }
 
   const socialFields = (Object.keys(NETWORKS) as Network[]).map((n) => `
     <label>${NETWORKS[n].label} text</label>
@@ -90,12 +95,22 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, request, params, d
           <div>
             <label>Topic</label>
             <select name="topic" ${editable ? '' : 'disabled'}>
-              ${TOPICS.map((t) => `<option value="${t}" ${d.topic === t ? 'selected' : ''}>${t}</option>`).join('')}
+              ${topics.map((t) => `<option value="${esc(t.slug)}" ${d.topic === t.slug ? 'selected' : ''}>${esc(t.title)}</option>`).join('')}
             </select>
           </div>
         </div>
         <label>Description (lede — cards, meta, previews)</label>
         <textarea name="description" rows="2" maxlength="300" ${editable ? '' : 'disabled'}>${esc(d.description)}</textarea>
+        <div class="row">
+          <div>
+            <label>SEO title <span class="hint">(optional, ≤ 60 chars; empty = post title)</span></label>
+            <input type="text" name="seo_title" value="${esc(d.seo_title ?? '')}" maxlength="60" ${editable ? '' : 'disabled'}>
+          </div>
+          <div>
+            <label>SEO description <span class="hint">(optional, ≤ 160; empty = lede)</span></label>
+            <input type="text" name="seo_description" value="${esc(d.seo_description ?? '')}" maxlength="160" ${editable ? '' : 'disabled'}>
+          </div>
+        </div>
         <div class="row">
           <div>
             <label>Tags (comma separated)</label>
@@ -235,6 +250,12 @@ export const onRequestPost: PagesFunction<Env> = async ({ env, request, params, 
     `UPDATE drafts SET title = ?, description = ?, topic = ?, tags = ?, tldr = ?, faq = ?,
        body = ?, social = ?, updated_at = datetime('now') WHERE id = ?`,
   ).bind(...fields).run();
+
+  // SEO overrides live in columns added by a later migration — fail soft if absent.
+  try {
+    await env.DB.prepare('UPDATE drafts SET seo_title = ?, seo_description = ? WHERE id = ?')
+      .bind(g('seo_title').trim(), g('seo_description').trim(), d.id).run();
+  } catch { /* columns not migrated yet — see admin/schema.sql */ }
 
   // Admin-only service fields
   if (user.role === 'admin') {
