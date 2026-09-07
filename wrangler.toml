@@ -1,21 +1,24 @@
-# Project config. Cloudflare builds this repo with Workers Builds
-# (Deploy command: npx wrangler deploy), so the config must declare
-# the static assets (the Astro build) — Pages Functions in functions/
-# are bundled as the Worker code automatically when no `main` is set.
+# Workers Builds config (Deploy command: npx wrangler deploy).
+# The site is static (Astro → dist, served as Workers assets); the admin CMS
+# in functions/ is compiled by `npm run build` into .worker/ and runs as the
+# Worker script. /admin/* goes to the Worker first, everything else to assets.
 name = "blog-shubinvc"
-pages_build_output_dir = "dist"
 compatibility_date = "2025-09-01"
 compatibility_flags = ["nodejs_compat"]
+main = ".worker/index.js"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "404-page"
+run_worker_first = ["/admin", "/admin/*"]
 
-# ── shubin.vc admin (Pages Functions) ──────────────────────────────────────
+# ── shubin.vc admin ────────────────────────────────────────────────────────
 # 1) Create the database:   wrangler d1 create shubinvc-admin
 #    then put the printed database_id below and run admin/schema.sql
 # 2) Create KV storage:     wrangler kv namespace create ADMIN_KV
 #    then put the printed id below
-# 3) Secrets (wrangler pages secret put <NAME> --project-name blog-shubinvc):
+# 3) Secrets (wrangler secret put <NAME>, or dashboard → Variables and Secrets):
 #    GITHUB_TOKEN  — fine-grained PAT, Contents: read/write on the repo
 #    TOKEN_KEY     — 64 random hex chars (AES-256 key for stored API tokens)
 #    GOOGLE_SA_JSON — optional, service-account JSON for the Indexing API

@@ -5,3 +5,4 @@ dist/
 .env
 .env.production
 /index.html
+.worker
