@@ -1,4 +1,4 @@
-# shubin.vc — Nick Shubin's professional blog
+# shubin.vc — Nik Shubin's professional blog
 
 A personal expert blog-media: a hybrid of a personal site and a content archive.
 Static site built with **Astro + Tailwind**, hosted on **Cloudflare Pages**.
