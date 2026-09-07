@@ -26,11 +26,11 @@ run_worker_first = ["/admin", "/admin/*"]
 [[d1_databases]]
 binding = "DB"
 database_name = "shubinvc-admin"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "e424021a-f4aa-4256-a525-837f2ffdbf29"
 
 [[kv_namespaces]]
 binding = "ADMIN_KV"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "f9e92b9ae87f402e9998f8f38bdf7f08"
 
 [vars]
 GITHUB_OWNER = "raceoffer"
