@@ -49,7 +49,9 @@ CREATE TABLE IF NOT EXISTS drafts (
   status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','review','published','rejected')),
   author_id TEXT NOT NULL REFERENCES users(id),
   pub_date TEXT,                        -- YYYY-MM-DD, set at publish
-  social TEXT NOT NULL DEFAULT '{}',    -- JSON {linkedin,x,medium,threads} custom texts
+  social TEXT NOT NULL DEFAULT '{}',    -- JSON {linkedin,x,medium,threads,facebook} custom texts
+  seo_title TEXT NOT NULL DEFAULT '',       -- manual overrides (empty = use title/lede)
+  seo_description TEXT NOT NULL DEFAULT '',
   published_url TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now')),
@@ -57,6 +59,11 @@ CREATE TABLE IF NOT EXISTS drafts (
 );
 CREATE INDEX IF NOT EXISTS idx_drafts_author ON drafts(author_id);
 CREATE INDEX IF NOT EXISTS idx_drafts_status ON drafts(status);
+
+-- Migration for existing databases (run once in the D1 console):
+--   ALTER TABLE drafts ADD COLUMN seo_title TEXT NOT NULL DEFAULT '';
+--   ALTER TABLE drafts ADD COLUMN seo_description TEXT NOT NULL DEFAULT '';
+-- (Fresh installs get them via the CREATE TABLE below.)
 
 -- Crossposting tokens and admin settings.
 -- Secret values are stored AES-GCM-encrypted: enc:v1:<iv_b64>:<cipher_b64>

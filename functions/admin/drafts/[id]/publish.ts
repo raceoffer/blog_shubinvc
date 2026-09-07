@@ -9,6 +9,7 @@ import { withMsg } from '../../../lib/layout';
 import { audit, requireAdmin } from '../../../lib/auth';
 import { commitFiles, toBase64Utf8, CommitFile } from '../../../lib/github';
 import { notifyGoogle } from '../../../lib/google';
+import { getTopics, topicMarkdown } from '../../../lib/topics';
 
 function yamlString(s: string): string {
   return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
@@ -70,11 +71,24 @@ export const onRequestPost: PagesFunction<Env> = async ({ env, params, data }) =
   }
   if (d.featured) fm.push('featured: true');
   if (d.research) fm.push('research: true');
+  if (d.seo_title || d.seo_description) {
+    fm.push('seo:');
+    if (d.seo_title) fm.push(`  title: ${yamlString(d.seo_title)}`);
+    if (d.seo_description) fm.push(`  description: ${yamlString(d.seo_description)}`);
+  }
   if (Object.keys(social).length) {
     fm.push('social:');
     for (const [k, v] of Object.entries(social)) fm.push(`  ${k}: ${yamlString(String(v))}`);
   }
   fm.push('---', '');
+
+  // Topic landing pages: (re)commit the admin-managed topic set so a new topic
+  // goes live with the same deploy. Deleted topics keep their files in the repo
+  // so old posts never lose /topics/<slug>.
+  const topics = await getTopics(env);
+  for (const t of topics) {
+    files.push({ path: `src/content/topics/${t.slug}.md`, content: topicMarkdown(t) });
+  }
 
   files.push({
     path: `src/content/blog/${slug}.md`,
