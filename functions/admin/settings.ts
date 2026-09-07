@@ -15,6 +15,8 @@ const TOKEN_FIELDS: Record<string, { label: string; secret: boolean; hint?: stri
   medium_token: { label: 'Medium integration token', secret: true, hint: 'Medium no longer issues new ones; an existing token still works' },
   threads_token: { label: 'Threads access token', secret: true, hint: 'long-lived token from the Threads API app' },
   threads_user_id: { label: 'Threads user ID', secret: false },
+  facebook_page_id: { label: 'Facebook page ID', secret: false, hint: 'numeric id of your Facebook Page' },
+  facebook_page_token: { label: 'Facebook page access token', secret: true, hint: 'long-lived page token with pages_manage_posts' },
 };
 
 export const onRequestGet: PagesFunction<Env> = async ({ env, request, data }) => {
