@@ -127,7 +127,7 @@ npx wrangler login
 
 # 1. Database
 wrangler d1 create shubinvc-admin            # copy database_id into wrangler.toml
-wrangler d1 execute shindenvc-admin --remote --file=admin/schema.sql
+wrangler d1 execute shubinvc-admin --remote --file=admin/schema.sql
 
 # 2. KV for images/challenges
 wrangler kv namespace create ADMIN_KV        # copy id into wrangler.toml
@@ -139,7 +139,7 @@ wrangler secret put TOKEN_KEY
 #     64 random hex chars:  openssl rand -hex 32
 ```
 
-(The project deploys via **Workers Builds**: `npm run build` compiles the
+(The project deploys via **Workers Builds**: `npm run build` компiles the
 Astro site to `dist/` *and* the `functions/` admin to `.worker/`, then
 `npx wrangler deploy` ships both — config in `wrangler.toml`.)
 
