@@ -1,12 +1,14 @@
-# Pages Functions project config.
-# NB: keep `pages_build_output_dir` in this file. Without it, Cloudflare's
-# build pipeline picks `npx wrangler deploy` (Workers syntax) instead of
-# `npx wrangler pages deploy` and the deploy step fails with
-# "Missing entry-point to Worker script or to assets directory".
+# Project config. Cloudflare builds this repo with Workers Builds
+# (Deploy command: npx wrangler deploy), so the config must declare
+# the static assets (the Astro build) — Pages Functions in functions/
+# are bundled as the Worker code automatically when no `main` is set.
 name = "blog-shubinvc"
 pages_build_output_dir = "dist"
 compatibility_date = "2025-09-01"
 compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./dist"
 
 # ── shubin.vc admin (Pages Functions) ──────────────────────────────────────
 # 1) Create the database:   wrangler d1 create shubinvc-admin
