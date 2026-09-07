@@ -139,7 +139,7 @@ wrangler secret put TOKEN_KEY
 #     64 random hex chars:  openssl rand -hex 32
 ```
 
-(The project deploys via **Workers Builds**: `npm run build` компiles the
+(The project deploys via **Workers Builds**: `npm run build` compiles the
 Astro site to `dist/` *and* the `functions/` admin to `.worker/`, then
 `npx wrangler deploy` ships both — config in `wrangler.toml`.)
 
