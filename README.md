@@ -109,7 +109,7 @@ A real CMS lives in `functions/` and runs on the same domain via Pages Functions
 - **admin** — everything a writer can, plus: publishes (single commit to the
   repo → Pages rebuild), rejects back to the author, edits service fields
   (slug, date, featured/research flags), crossposts to LinkedIn / X / Medium /
-  Threads with per-network texts, manages tokens, users and passkeys.
+  Threads / Facebook with per-network texts, manages tokens, topics, users and passkeys.
 
 **Auth** — email + password (PBKDF2-100k), plus passkeys (WebAuthn ES256) as a
 mandatory second factor once registered. Sessions: httpOnly, SameSite=Strict,
@@ -170,6 +170,28 @@ Managed in `/admin/settings` (encrypted at rest):
 | X | API key/secret + access token/secret (OAuth 1.0a app with write) |
 | Medium | Integration token (existing ones work; Medium no longer issues new) |
 | Threads | Long-lived token + user id from the Threads API app |
+| Facebook | Page ID + long-lived page access token with `pages_manage_posts` |
 
 Each network can be posted to separately from the published post's page, and
 each uses its own text from the "Social texts" section — never a random summary.
+The posts list shows the latest crosspost status per network for every
+published post.
+
+### Topics
+
+Admins manage the topic set in `/admin/topics` (add, rename, describe, delete).
+The editor's topic select reads this set; on every publish the topic files are
+committed to `src/content/topics/` so `/topics/<slug>` landing pages stay in
+sync. Deleting a topic removes it from the editor only — published posts keep
+their topic page.
+
+### SEO: automatic vs manual
+
+Automatic on every post: canonical URL, Open Graph + Twitter Cards with a
+generated 1200×630 image, `BlogPosting` JSON-LD (headline, description, dates,
+author Person with sameAs, keywords from tags, articleSection from the topic,
+word count, reading time), `BreadcrumbList`, `FAQPage` when the FAQ block is
+filled, sitemap `<lastmod>`, full-text RSS, `llms.txt`.
+Manual (per post, in the editor): title ≤ 60 chars, lede ≤ 160, tags, 3–5
+TL;DR bullets, optional FAQ, and optional SEO title/description overrides that
+replace title/lede in meta only.
