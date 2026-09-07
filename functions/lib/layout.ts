@@ -80,7 +80,7 @@ ${user ? `
   <a class="brand" href="/admin">${ARROW_SVG} SHUBIN<small>vc · admin</small></a>
   <nav>
     <a href="/admin">Posts</a>
-    ${user.role === 'admin' ? '<a href="/admin/settings">Settings</a>' : ''}
+    ${user.role === 'admin' ? '<a href="/admin/topics">Topics</a><a href="/admin/settings">Settings</a>' : ''}
     <a href="/" target="_blank">View site ↗</a>
     <a href="/admin/logout">Log out (${esc(user.name)})</a>
   </nav>
