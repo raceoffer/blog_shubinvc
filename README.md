@@ -111,7 +111,7 @@ A real CMS lives in `functions/` and runs on the same domain via Pages Functions
   (slug, date, featured/research flags), crossposts to LinkedIn / X / Medium /
   Threads with per-network texts, manages tokens, users and passkeys.
 
-**Auth** — email + password (PBKDF2-210k), plus passkeys (WebAuthn ES256) as a
+**Auth** — email + password (PBKDF2-100k), plus passkeys (WebAuthn ES256) as a
 mandatory second factor once registered. Sessions: httpOnly, SameSite=Strict,
 14 days. Login is rate-limited (10 attempts / 10 min per IP).
 

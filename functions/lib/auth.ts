@@ -3,7 +3,8 @@ import {
   Env, User, b64encode, b64decode, randomId, sha256, safeEqual, redirect,
 } from './types';
 
-const ITERATIONS = 210_000;
+// Cloudflare Workers WebCrypto caps PBKDF2 at 100000 iterations.
+const ITERATIONS = 100_000;
 export const SESSION_COOKIE = 'sb_session';
 const SESSION_TTL_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
 
