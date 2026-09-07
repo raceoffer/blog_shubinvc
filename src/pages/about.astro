@@ -97,8 +97,7 @@ const personLd = {
 
       <h2>Contacts</h2>
       <p>
-        Fastest is <a href={AUTHOR.socials[0].url}>Telegram</a>. For longer letters —
-        <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. All profiles: {' '}
+        Write to <a href={`mailto:${AUTHOR.email}`}>{AUTHOR.email}</a>. Profiles: {' '}
         {AUTHOR.socials.map((s, i) => (
           <>
             <a href={s.url} rel="me noopener" target="_blank">{s.label}</a>{i < AUTHOR.socials.length - 1 ? ' · ' : ''}

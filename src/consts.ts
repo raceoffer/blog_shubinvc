@@ -19,10 +19,8 @@ export const AUTHOR = {
   email: 'hi@shubin.vc',
   // sameAs profiles — important for Schema.org Person and GEO (a unified author graph).
   socials: [
-    { label: 'Telegram', url: 'https://t.me/nickshubin' },
-    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nickshubin' },
-    { label: 'X', url: 'https://x.com/nickshubin' },
-    { label: 'GitHub', url: 'https://github.com/nickshubin' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nik-shubin/' },
+    { label: 'X', url: 'https://x.com/shubinvc' },
   ],
 } as const;
 
