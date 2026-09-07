@@ -65,9 +65,10 @@ draft: false           # true — excluded from the production build
 ## What's inside
 
 - **Pages:** `/` (hero + feed), `/about`, `/blog` (archive with search and topic filters), `/blog/[slug]`, `/topics/[topic]`, `/newsletter`, `/research`, `404`.
+- **Admin:** `/admin` — Cloudflare Pages Functions CMS with two roles (writer/admin), passkey auth, GitHub publishing, crossposting. See "Admin" below.
 - **SEO:** unique title/description, canonical, sitemap.xml, robots.txt, full-text RSS, Open Graph + Twitter Cards with auto-generated OG images, Schema.org (`BlogPosting`, `Person`, `BreadcrumbList`, `FAQPage`, `WebSite`+`SearchAction`).
 - **GEO:** `llms.txt`, semantic static HTML, TL;DR blocks, FAQ, Person markup with sameAs.
-- **Dark theme:** light by default, manual toggle in the header.
+- **Dark theme:** system-driven + manual toggle.
 - **Performance budget:** 0 JS on reading pages (search lives only in `/blog`), self-hosted subsetted fonts, inlined critical CSS.
 
 ## Customizing
@@ -95,3 +96,76 @@ large ones split as `.b64.part1`, `.part2`, …) so they survive any Git client.
 automatically before every `npm run dev` / `npm run build` (registered as
 `predev`/`prebuild` hooks). To add a new binary:
 `base64 -w 76 file.jpg > assets-src/file.jpg.b64` and commit that.
+
+## Admin (`/admin`) — Cloudflare Pages Functions
+
+A real CMS lives in `functions/` and runs on the same domain via Pages Functions.
+
+**Roles**
+
+- **writer** — creates drafts, formats the body in Markdown (with preview in the
+  site's typography), uploads images, fills TL;DR/FAQ and per-network social
+  texts, sends the draft to review. Cannot publish, cannot touch service fields.
+- **admin** — everything a writer can, plus: publishes (single commit to the
+  repo → Pages rebuild), rejects back to the author, edits service fields
+  (slug, date, featured/research flags), crossposts to LinkedIn / X / Medium /
+  Threads with per-network texts, manages tokens, users and passkeys.
+
+**Auth** — email + password (PBKDF2-210k), plus passkeys (WebAuthn ES256) as a
+mandatory second factor once registered. Sessions: httpOnly, SameSite=Strict,
+14 days. Login is rate-limited (10 attempts / 10 min per IP).
+
+**Data** — D1 (users, sessions, passkeys, drafts, tokens, crosspost log, audit)
+and KV (draft images, WebAuthn challenges, rate limits). API tokens are stored
+AES-GCM-encrypted with the `TOKEN_KEY` secret.
+
+### Setup (one time, ~10 minutes)
+
+```bash
+npm i -D wrangler
+wrangler login
+
+# 1. Database
+wrangler d1 create shubinvc-admin            # copy database_id into wrangler.toml
+wrangler d1 execute shubinvc-admin --remote --file=admin/schema.sql
+
+# 2. KV for images/challenges
+wrangler kv namespace create ADMIN_KV        # copy id into wrangler.toml
+
+# 3. Secrets
+wrangler pages secret put GITHUB_TOKEN --project-name blog-shubinvc
+#     fine-grained PAT with Contents: Read & Write on this repo
+wrangler pages secret put TOKEN_KEY --project-name blog-shubinvc
+#     64 random hex chars:  openssl rand -hex 32
+```
+
+Deploy → open `https://shubin.vc/admin/setup` → create the first administrator
+(the page locks itself once a user exists) → log in → Settings → register a
+passkey and fill in the crossposting tokens.
+
+### Publishing & SEO side effects
+
+Publishing commits `src/content/blog/<slug>.md` (+ images into
+`public/uploads/<slug>/`) to `main`. Cloudflare Pages rebuilds automatically,
+and the rebuild regenerates **sitemap.xml, rss.xml and llms.txt** — nothing
+extra to do. Google: the old sitemap ping endpoint no longer exists (retired in
+2024), so the reliable channel is the fresh `<lastmod>` in the sitemap. If you
+want the extra push, create a Google Cloud service account with the Indexing
+API enabled, add it as an owner of the Search Console property, and set
+`wrangler pages secret put GOOGLE_SA_JSON` — every publish will then send
+`URL_UPDATED` for the post (note: the API is officially intended for
+job/streaming pages, sitemap remains the primary mechanism).
+
+### Crossposting tokens
+
+Managed in `/admin/settings` (encrypted at rest):
+
+| Network | What to paste |
+|---|---|
+| LinkedIn | OAuth2 token with `w_member_social` + your person id (from `urn:li:person:<id>`) |
+| X | API key/secret + access token/secret (OAuth 1.0a app with write) |
+| Medium | Integration token (existing ones work; Medium no longer issues new) |
+| Threads | Long-lived token + user id from the Threads API app |
+
+Each network can be posted to separately from the published post's page, and
+each uses its own text from the "Social texts" section — never a random summary.
