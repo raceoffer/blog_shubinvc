@@ -3,16 +3,16 @@
 
 export const SITE = {
   url: 'https://shubin.vc',
-  title: 'Nick Shubin — on startups, product & AI',
-  shortTitle: 'Nick Shubin',
+  title: 'Nik Shubin — on startups, product & AI',
+  shortTitle: 'Nik Shubin',
   description:
-    'The personal blog of founder and investor Nick Shubin: startups, product, AI and venture — with numbers, tables and zero fluff.',
+    'The personal blog of founder and investor Nik Shubin: startups, product, AI and venture — with numbers, tables and zero fluff.',
   lang: 'en',
   locale: 'en_US',
 } as const;
 
 export const AUTHOR = {
-  name: 'Nick Shubin',
+  name: 'Nik Shubin',
   nameNative: 'Ник Шубин',
   role: 'Founder & Investor',
   bio: 'I build tech companies and invest at the earliest stages. I write about what I have tested with my own money and mistakes.',

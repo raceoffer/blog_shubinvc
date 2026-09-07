@@ -30,7 +30,7 @@ Newsletter: ${NEWSLETTER.name} — ${SITE.url}/newsletter. Full-text RSS: ${SITE
 
 ## Pages
 
-- [About Nick](${SITE.url}/about): bio, talks, contacts, sameAs profiles.
+- [About Nik](${SITE.url}/about): bio, talks, contacts, sameAs profiles.
 - [Blog — archive](${SITE.url}/blog): all posts with search and topic filters.
 - [Research](${SITE.url}/research): flagship market overviews with open data.
 - [Newsletter](${SITE.url}/newsletter): the weekly email and issue archive.
