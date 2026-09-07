@@ -54,6 +54,9 @@ const blogPostingLd = {
   mainEntityOfPage: url,
   image: new URL(ogImage, SITE.url).toString(),
   datePublished: post.data.pubDate.toISOString(),
+  wordCount: (post.body ?? '').split(/\s+/).filter(Boolean).length,
+  timeRequired: `PT${Math.max(1, minutes)}M`,
+  isAccessibleForFree: true,
   dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
   inLanguage: SITE.lang,
   author: {
