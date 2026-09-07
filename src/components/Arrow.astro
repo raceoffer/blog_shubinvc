@@ -1,0 +1,23 @@
+---
+// The SHUBIN.vc brand arrow: two-tone (cyan/blue) right-pointing arrow
+// extracted from the master logo. Used as a motif across the site.
+interface Props {
+  class?: string;
+}
+const { class: cls = 'h-5 w-5' } = Astro.props;
+---
+
+<svg class={cls} viewBox="0 0 100 100" aria-hidden="true">
+  <polygon
+    points="0,0 49.7,0 76.5,26.2 0,100"
+    fill="#bbe8ed"
+    stroke="#bbe8ed"
+    stroke-width="2"
+    stroke-linejoin="round"></polygon>
+  <polygon
+    points="0,100 74.7,25.1 99.7,50 49.7,100"
+    fill="#c7ddf9"
+    stroke="#c7ddf9"
+    stroke-width="2"
+    stroke-linejoin="round"></polygon>
+</svg>

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
 # AI crawlers: explicitly allowed for GEO
 User-agent: GPTBot

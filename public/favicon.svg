@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#1a1a1a"/>
-  <text x="32" y="43" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="600" fill="#c9efa2">N</text>
+  <g transform="translate(13 13) scale(0.38)">
+    <polygon points="0,0 49.7,0 76.5,26.2 0,100" fill="#bbe8ed" stroke="#bbe8ed" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="0,100 74.7,25.1 99.7,50 49.7,100" fill="#c7ddf9" stroke="#c7ddf9" stroke-width="3" stroke-linejoin="round"/>
+  </g>
 </svg>

@@ -1,0 +1,14 @@
+---
+// Section heading with the brand arrow — a recurring visual motif.
+import Arrow from './Arrow.astro';
+
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<h2 class:list={['meta-label flex items-center gap-2', cls]}>
+  <Arrow class="h-3.5 w-3.5" />
+  <slot />
+</h2>

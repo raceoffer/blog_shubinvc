@@ -1,5 +1,6 @@
 ---
-import { AUTHOR, NAV, SITE } from '../consts';
+import { AUTHOR, NAV } from '../consts';
+import Arrow from './Arrow.astro';
 
 const year = new Date().getFullYear();
 ---
@@ -7,7 +8,13 @@ const year = new Date().getFullYear();
 <footer class="mt-24 border-t line">
   <div class="mx-auto grid max-w-3xl gap-10 px-5 py-12 sm:grid-cols-3">
     <div>
-      <p class="font-serif text-lg font-semibold">{SITE.shortTitle}</p>
+      <a href="/" class="flex items-center gap-2 transition-opacity hover:opacity-80" aria-label="SHUBIN vc — home">
+        <Arrow class="h-5 w-5" />
+        <span class="flex items-baseline gap-[2px] leading-none">
+          <span class="font-sans text-[1.05rem] font-extrabold tracking-[-0.01em]">SHUBIN</span>
+          <span class="font-sans text-[0.55rem] font-bold lowercase text-muted">vc</span>
+        </span>
+      </a>
       <p class="mt-2 text-sm leading-relaxed text-muted">
         Startups, product and AI — with numbers, no fluff.
       </p>
