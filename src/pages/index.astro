@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
 import SubscribeForm from '../components/SubscribeForm.astro';
+import Arrow from '../components/Arrow.astro';
+import SectionLabel from '../components/SectionLabel.astro';
 import { formatDate, getPosts, getTopics, postsByTopic, readingTime } from '../utils/posts';
 
 const posts = await getPosts();
@@ -55,14 +57,17 @@ const feed = posts.filter((p) => p !== lead).slice(0, 8);
         )
       }
 
-      <a href={`/blog/${lead.id}`} class="btn-accent mt-9">Read the piece</a>
+      <a href={`/blog/${lead.id}`} class="btn-accent mt-9 inline-flex items-center gap-2.5">
+        Read the piece
+        <Arrow class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+      </a>
     </article>
   </section>
 
   {/* The rest of the feed. */}
   <section class="mx-auto max-w-3xl px-5 pt-24">
     <div class="mb-6 flex items-baseline justify-between">
-      <h2 class="meta-label">More posts</h2>
+      <SectionLabel>More posts</SectionLabel>
       <a href="/blog" class="link-underline font-mono text-[0.75rem] uppercase tracking-[0.12em] text-muted hover:text-ink">
         Full archive →
       </a>
@@ -74,7 +79,7 @@ const feed = posts.filter((p) => p !== lead).slice(0, 8);
 
   {/* Pillar topics. */}
   <section class="mx-auto max-w-3xl px-5 pt-20">
-    <h2 class="meta-label mb-4">Topics</h2>
+    <SectionLabel class="mb-4">Topics</SectionLabel>
     <ul class="divide-y divide-transparent border-t line">
       {
         topics.map((topic) => {

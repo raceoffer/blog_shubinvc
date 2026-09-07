@@ -1,5 +1,6 @@
 ---
 import { NEWSLETTER } from '../consts';
+import Arrow from './Arrow.astro';
 ---
 
 {/*
@@ -23,7 +24,7 @@ import { NEWSLETTER } from '../consts';
         <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
       </svg>
     </button>
-    <p class="meta-label">{NEWSLETTER.name}</p>
+    <p class="meta-label flex items-center gap-2"><Arrow class="h-3.5 w-3.5" />{NEWSLETTER.name}</p>
     <p class="mt-3 pr-6 font-serif text-[1.35rem] font-semibold leading-snug">
       {NEWSLETTER.pitch}
     </p>
