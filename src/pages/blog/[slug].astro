@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
 import ShareBar from '../../components/ShareBar.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 import { AUTHOR, SITE } from '../../consts';
 import {
@@ -246,7 +247,7 @@ const faqLd = post.data.faq?.length
     {
       recommended.length > 0 && (
         <section class="mt-16">
-          <h2 class="meta-label mb-2">Recommended</h2>
+          <SectionLabel class="mb-2">Recommended</SectionLabel>
           <div>
             {recommended.map((p) => (
               <PostCard post={p} topics={topics} />
@@ -260,7 +261,7 @@ const faqLd = post.data.faq?.length
     {
       related.length > 0 && (
         <section class="mt-16">
-          <h2 class="meta-label mb-2">Related posts</h2>
+          <SectionLabel class="mb-2">Related posts</SectionLabel>
           <div>
             {related.map((p) => (
               <PostCard post={p} topics={topics} />

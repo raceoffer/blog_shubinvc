@@ -1,0 +1,30 @@
+name = "blog-shubinvc"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-09-01"
+
+# ── shubin.vc admin (Pages Functions) ──────────────────────────────────────
+# 1) Create the database:   wrangler d1 create shubinvc-admin
+#    then put the printed database_id below and run admin/schema.sql
+# 2) Create KV storage:     wrangler kv namespace create ADMIN_KV
+#    then put the printed id below
+# 3) Secrets (wrangler pages secret put <NAME> --project-name blog-shubinvc):
+#    GITHUB_TOKEN  — fine-grained PAT, Contents: read/write on the repo
+#    TOKEN_KEY     — 64 random hex chars (AES-256 key for stored API tokens)
+#    GOOGLE_SA_JSON — optional, service-account JSON for the Indexing API
+
+[[d1_databases]]
+binding = "DB"
+database_name = "shubinvc-admin"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[kv_namespaces]]
+binding = "ADMIN_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+GITHUB_OWNER = "raceoffer"
+GITHUB_REPO = "blog_shubinvc"
+GITHUB_BRANCH = "main"
+SITE_URL = "https://shubin.vc"
+RP_ID = "shubin.vc"
+RP_NAME = "SHUBIN.vc"
