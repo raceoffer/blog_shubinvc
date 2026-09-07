@@ -38,6 +38,8 @@ export interface Draft {
   author_id: string;
   pub_date: string | null;
   social: string;    // JSON
+  seo_title?: string;        // optional manual overrides (ALTER TABLE migration)
+  seo_description?: string;
   published_url: string | null;
   created_at: string;
   updated_at: string;

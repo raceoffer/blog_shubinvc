@@ -1,4 +1,4 @@
-// Crossposting to LinkedIn, X, Medium and Threads.
+// Crossposting to LinkedIn, X, Medium, Threads and Facebook.
 // Tokens are stored encrypted in D1 settings and managed from /admin/settings.
 import { Env, Draft, b64encode } from './types';
 import { getSetting } from './crypto';
@@ -156,12 +156,32 @@ async function toThreads(env: Env, d: Draft, text: string): Promise<CrosspostRes
   return { status: 'ok', url: pubBody.id ? `https://www.threads.net/post/${pubBody.id}` : undefined };
 }
 
+// ── Facebook (Page feed via Graph API) ─────────────────────────────────────
+// Needs a long-lived PAGE access token with pages_manage_posts + page id.
+async function toFacebook(env: Env, d: Draft, text: string): Promise<CrosspostResult> {
+  const token = await getSetting(env, 'facebook_page_token', true);
+  const pageId = await getSetting(env, 'facebook_page_id');
+  if (!token || !pageId) return { status: 'skipped', error: 'Facebook page token/id not configured' };
+
+  const res = await fetch(`https://graph.facebook.com/v21.0/${encodeURIComponent(pageId)}/feed`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', ...UA },
+    body: JSON.stringify({ message: text, link: postUrl(env, d), access_token: token }),
+  });
+  const body = (await res.json().catch(() => ({}))) as any;
+  if (!res.ok || !body.id) {
+    return { status: 'error', error: `Facebook ${res.status}: ${JSON.stringify(body).slice(0, 300)}` };
+  }
+  return { status: 'ok', url: `https://www.facebook.com/${body.id}` };
+}
+
 // ── dispatcher ─────────────────────────────────────────────────────────────
 export const NETWORKS = {
   linkedin: { label: 'LinkedIn', fn: toLinkedIn },
   x: { label: 'X (Twitter)', fn: toX },
   medium: { label: 'Medium', fn: toMedium },
   threads: { label: 'Threads', fn: toThreads },
+  facebook: { label: 'Facebook', fn: toFacebook },
 } as const;
 
 export type Network = keyof typeof NETWORKS;
